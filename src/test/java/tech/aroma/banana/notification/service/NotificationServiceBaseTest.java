@@ -25,6 +25,7 @@ import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
 import tech.aroma.banana.thrift.service.BananaServiceConstants;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
+import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.GeneratePojo;
 import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
@@ -58,6 +59,14 @@ public class NotificationServiceBaseTest
         instance = new NotificationServiceBase(sendNotificationOperation);
         
         verifyZeroInteractions(sendNotificationOperation);
+    }
+    
+    @DontRepeat
+    @Test
+    public void testConstructor()
+    {
+        assertThrows(() -> new NotificationServiceBase(null))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
