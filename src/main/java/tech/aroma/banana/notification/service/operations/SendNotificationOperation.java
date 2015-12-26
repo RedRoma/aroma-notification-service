@@ -44,7 +44,6 @@ import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
  * @author SirWellington
  */
 @Internal
-
 final class SendNotificationOperation implements ThriftOperation<SendNotificationRequest, SendNotificationResponse>
 {
 
