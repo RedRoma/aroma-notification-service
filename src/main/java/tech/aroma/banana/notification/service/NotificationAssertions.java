@@ -21,13 +21,17 @@ package tech.aroma.banana.notification.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.banana.thrift.channels.BananaChannel;
+import tech.aroma.banana.thrift.notifications.Event;
+import tech.aroma.banana.thrift.notifications.EventType;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
 import tech.sirwellington.alchemy.arguments.FailedAssertionException;
 
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.assertions.Assertions.equalTo;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
+import static tech.sirwellington.alchemy.arguments.assertions.NumberAssertions.greaterThan;
 
 /**
  *
@@ -85,4 +89,35 @@ public final class NotificationAssertions
         return false;
     }
 
+    
+    public static AlchemyAssertion<Event> validEvent()
+    {
+        return event ->
+        {
+            checkThat(event)
+                .usingMessage("event is missing")
+                .is(notNull());
+            
+            checkThat(event.timestamp)
+                .usingMessage("invalid timestamp: " + event.timestamp)
+                .is(greaterThan(0L));
+            
+            checkThat(event.eventType)
+                .is(validEventType());
+        };
+    }
+    
+    public static AlchemyAssertion<EventType> validEventType()
+    {
+        return type ->
+        {
+            checkThat(type)
+                .usingMessage("missing eventType")
+                .is(notNull());
+            
+            checkThat(type.isSet())
+                .usingMessage("eventType is not set")
+                .is(equalTo(true));
+        };
+    }
 }

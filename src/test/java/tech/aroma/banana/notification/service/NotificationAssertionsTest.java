@@ -20,7 +20,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import tech.aroma.banana.thrift.channels.BananaChannel;
+import tech.aroma.banana.thrift.notifications.Event;
+import tech.aroma.banana.thrift.notifications.EventType;
 import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
+import tech.sirwellington.alchemy.arguments.FailedAssertionException;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
 import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.Repeat;
@@ -28,7 +31,10 @@ import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static tech.aroma.banana.notification.service.ChannelGenerators.channels;
+import static tech.aroma.banana.notification.service.EventGenerators.events;
+import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
+import static tech.sirwellington.alchemy.generator.TimeGenerators.pastInstants;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 
 /**
@@ -41,11 +47,13 @@ public class NotificationAssertionsTest
 {
 
     private BananaChannel channel;
+    private Event event;
 
     @Before
     public void setUp()
     {
         channel = one(channels());
+        event = one(events());
     }
     
     @DontRepeat
@@ -66,6 +74,53 @@ public class NotificationAssertionsTest
 
         BananaChannel empty = new BananaChannel();
         assertThrows(() -> assertion.check(empty));
+    }
+
+    @Test
+    public void testValidEvent()
+    {
+        AlchemyAssertion<Event> assertion = NotificationAssertions.validEvent();
+        checkThat(assertion, notNullValue());
+        
+        
+        //Test with Bad arguments
+        assertThrows(() -> assertion.check(null))
+            .isInstanceOf(FailedAssertionException.class);
+        
+        Event empty = new Event();
+        assertThrows(() -> assertion.check(empty))
+            .isInstanceOf(FailedAssertionException.class);
+        
+        //Missing event type
+        Event missingEventType = new Event()
+        .setTimestamp(one(pastInstants()).toEpochMilli());
+        assertThrows(() -> assertion.check(missingEventType))
+            .isInstanceOf(FailedAssertionException.class);
+            
+        //Remove the timestamp
+        event.timestamp = 0;
+        assertThrows(() -> assertion.check(event))
+            .isInstanceOf(FailedAssertionException.class);
+    }
+
+    @Test
+    public void testValidEventType()
+    {
+        AlchemyAssertion<EventType> assertion = NotificationAssertions.validEventType();
+        checkThat(assertion, notNullValue());
+        
+        EventType eventType = event.eventType;
+        assertion.check(eventType);
+        
+        // Check with bad arguments
+        
+        assertThrows(() -> assertion.check(null))
+            .isInstanceOf(FailedAssertionException.class);
+        
+        EventType empty = new EventType();
+        assertThrows(() -> assertion.check(empty))
+            .isInstanceOf(FailedAssertionException.class);
+        
     }
 
 }
