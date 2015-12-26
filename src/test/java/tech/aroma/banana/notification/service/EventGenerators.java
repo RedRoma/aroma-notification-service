@@ -36,6 +36,7 @@ import tech.sirwellington.alchemy.generator.TimeGenerators;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
 import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
+import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 
 /**
  *
@@ -80,7 +81,7 @@ public final class EventGenerators
         };
     }
     
-    public static AlchemyGenerator<Event> eventGenerators()
+    public static AlchemyGenerator<Event> events()
     {
         return () ->
         {
