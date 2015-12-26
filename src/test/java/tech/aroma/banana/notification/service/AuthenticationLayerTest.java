@@ -118,6 +118,9 @@ public class AuthenticationLayerTest
     @Test
     public void testSendNotification() throws Exception
     {
+        SendNotificationResponse response = instance.sendNotification(sendNotificationRequest);
+        assertThat(response, is(sendNotificationResponse));
+        verify(delegate).sendNotification(sendNotificationRequest);
     }
     
     @Test
