@@ -23,6 +23,7 @@ import tech.aroma.banana.thrift.exceptions.InvalidArgumentException;
 import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
+import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.GeneratePojo;
 import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
@@ -35,7 +36,7 @@ import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThr
  *
  * @author SirWellington
  */
-@Repeat(10)
+@Repeat(100)
 @RunWith(AlchemyTestRunner.class)
 public class SendNotificationOperationTest 
 {
@@ -61,6 +62,7 @@ public class SendNotificationOperationTest
         
     }
     
+    @DontRepeat
     @Test
     public void testProcessWithBadRequest() throws Exception
     {
