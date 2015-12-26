@@ -127,14 +127,26 @@ public final class ChannelGenerators
         {
             BananaChannel channel = new BananaChannel();
             
-            int number = one(integers(1, 12));
+            int number = one(integers(1, 6));
             
             switch(number)
             {
                 case 1:
-                    
+                    channel.setCustomChannel(one(customChannels()));
+                    break;
+                case 2:
+                    channel.setEmail(one(emails()));
+                    break;
+                case 3:
+                    channel.setSlackChannel(one(slackChannels()));
+                    break;
+                case 4:
+                    channel.setSlackUsername(one(slackUsernames()));
+                    break;
+                default:
+                    channel.setSlackChannel(one(slackChannels()));
+                    break;
             }
-            
             
             return channel;
         };
