@@ -6,4 +6,4 @@ Banana Service
 [![Build Status](http://jenkins.sirwellington.tech/view/Banana/job/Banana%20Service/badge/icon)](http://jenkins.sirwellington.tech/view/Banana/job/Banana%20Service/)
 
 
-he Banana Notification Service is responsible for managing and sending notifications to Developers and Banana Channels.
+The Banana Notification Service is responsible for managing and sending notifications to Developers and Banana Channels.
