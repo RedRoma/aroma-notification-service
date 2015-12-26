@@ -52,7 +52,7 @@ final class AuthenticationLayer implements NotificationService.Iface
     private final static Logger LOG = LoggerFactory.getLogger(AuthenticationLayer.class);
 
     private final AuthenticationService.Iface authenticationService;
-    private NotificationService.Iface delegate;
+    private final NotificationService.Iface delegate;
     
     @Inject
     AuthenticationLayer(AuthenticationService.Iface authenticationService,
