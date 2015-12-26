@@ -40,6 +40,12 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
     {
         checkNotNull(request, "request is missing");
         
+        // For each Channel in the request...
+        // Obtain a 'courier' or a 'pigeon' type from a factory.
+        // send the event to the pigeon
+        
+        //Each pigeon is responsible for sending the message to the right place
+        
         SendNotificationResponse response = pojos(SendNotificationResponse.class).get();
         
         return response;
