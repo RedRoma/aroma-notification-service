@@ -18,6 +18,7 @@
 package tech.aroma.banana.notification.service;
 
 
+import javax.inject.Inject;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,8 @@ import tech.aroma.banana.thrift.service.BananaServiceConstants;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
 import static tech.aroma.banana.thrift.functions.BananaAssertions.checkNotNull;
+import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 
 /**
  *
@@ -40,7 +43,18 @@ final class NotificationServiceBase implements NotificationService.Iface
 {
     private final static Logger LOG = LoggerFactory.getLogger(NotificationServiceBase.class);
     
-    private ThriftOperation<SendNotificationRequest, SendNotificationResponse> sendNotificationOperation;
+    private final ThriftOperation<SendNotificationRequest, SendNotificationResponse> sendNotificationOperation;
+
+    @Inject
+    NotificationServiceBase(ThriftOperation<SendNotificationRequest, SendNotificationResponse> sendNotificationOperation)
+    {
+        checkThat(sendNotificationOperation)
+            .are(notNull());
+        
+        this.sendNotificationOperation = sendNotificationOperation;
+    }
+    
+    
     
 
     @Override
