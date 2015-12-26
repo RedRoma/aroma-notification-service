@@ -8,15 +8,16 @@
         <version>1.3-SNAPSHOT</version>
     </parent>
 
-    <artifactId>banana-notification-service</artifactId>
+    <artifactId>notification-service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
-    <url>https://github.com/AromaTech/banana-service</url>
+    <url>https://github.com/AromaTech/banana-notification-service</url>
     <description>
         Part of the Banana Service Project.
         Simplicity is paramount.
+        
         The Notification Service is responsible for managing and sending
         Notifications to device channels
     </description>
