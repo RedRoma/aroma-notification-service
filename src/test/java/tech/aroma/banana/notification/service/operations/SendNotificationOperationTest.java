@@ -70,5 +70,4 @@ public class SendNotificationOperationTest
             .isInstanceOf(InvalidArgumentException.class);
     }
     
-
 }
