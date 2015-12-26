@@ -21,6 +21,9 @@ import org.apache.thrift.TBase;
 import tech.aroma.banana.thrift.channels.BananaChannel;
 import tech.aroma.banana.thrift.exceptions.OperationFailedException;
 import tech.aroma.banana.thrift.notifications.Event;
+import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
+
+import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.INTERFACE;
 
 
 /**
@@ -30,6 +33,7 @@ import tech.aroma.banana.thrift.notifications.Event;
  * 
  * @param <C> The particular {@link BananaChannel} an implementation delivers.
  */
+@StrategyPattern(role = INTERFACE)
 public interface Pigeon <C extends TBase>
 {
     /**
