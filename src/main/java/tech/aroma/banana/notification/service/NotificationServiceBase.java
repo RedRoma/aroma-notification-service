@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
- 
 package tech.aroma.banana.notification.service;
-
 
 import javax.inject.Inject;
 import org.apache.thrift.TException;
@@ -29,9 +27,12 @@ import tech.aroma.banana.thrift.notification.service.NotificationService;
 import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
 import tech.aroma.banana.thrift.service.BananaServiceConstants;
+import tech.sirwellington.alchemy.annotations.access.Internal;
+import tech.sirwellington.alchemy.annotations.designs.patterns.DecoratorPattern;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
 import static tech.aroma.banana.thrift.functions.BananaAssertions.checkNotNull;
+import static tech.sirwellington.alchemy.annotations.designs.patterns.DecoratorPattern.Role.CONCRETE_COMPONENT;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 
@@ -39,10 +40,13 @@ import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull
  *
  * @author SirWellington
  */
+@Internal
+@DecoratorPattern(role = CONCRETE_COMPONENT)
 final class NotificationServiceBase implements NotificationService.Iface
 {
+
     private final static Logger LOG = LoggerFactory.getLogger(NotificationServiceBase.class);
-    
+
     private final ThriftOperation<SendNotificationRequest, SendNotificationResponse> sendNotificationOperation;
 
     @Inject
@@ -50,12 +54,9 @@ final class NotificationServiceBase implements NotificationService.Iface
     {
         checkThat(sendNotificationOperation)
             .are(notNull());
-        
+
         this.sendNotificationOperation = sendNotificationOperation;
     }
-    
-    
-    
 
     @Override
     public double getApiVersion() throws TException
@@ -66,13 +67,13 @@ final class NotificationServiceBase implements NotificationService.Iface
     @Override
     public SendNotificationResponse sendNotification(SendNotificationRequest request) throws InvalidArgumentException,
                                                                                              OperationFailedException,
-                                                                                             InvalidTokenException, 
+                                                                                             InvalidTokenException,
                                                                                              TException
     {
         checkNotNull(request, "request is missing");
-        
+
         LOG.info("Received request to send notification: {}", request);
-        
+
         return sendNotificationOperation.process(request);
     }
 
