@@ -41,6 +41,10 @@
             <includes>
                 <include>*.jar</include>
             </includes>
+            <excludes>
+                <exclude>*-javadoc*</exclude>
+                <exclude>*-sources*</exclude>
+            </excludes>
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}/lib</directory>
