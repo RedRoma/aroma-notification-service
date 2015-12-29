@@ -73,7 +73,7 @@ final class SlackChannelPigeon implements Pigeon<SlackChannel>
         request.channel = channel.channelName;
         request.text = message.toString();
 
-        LOG.info("Sending request to slack: {}", request);
+        LOG.info("Sending message to slack channel {}", channel);
 
         SlackResponse response;
         try
@@ -86,7 +86,7 @@ final class SlackChannelPigeon implements Pigeon<SlackChannel>
         }
         catch (Exception ex)
         {
-            LOG.error("Failed to send message to Slack: {}", message, ex);
+            LOG.error("Failed to send to Slack Channel: {}", channel, ex);
             return;
         }
         
