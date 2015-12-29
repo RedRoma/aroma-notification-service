@@ -32,9 +32,9 @@ import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.designs.patterns.DecoratorPattern;
 
-import static tech.aroma.banana.thrift.functions.BananaAssertions.checkRequestNotNull;
-import static tech.aroma.banana.thrift.functions.BananaAssertions.legalToken;
-import static tech.aroma.banana.thrift.functions.BananaAssertions.validTokenIn;
+import static tech.aroma.banana.thrift.assertions.BananaAssertions.checkRequestNotNull;
+import static tech.aroma.banana.thrift.assertions.BananaAssertions.legalToken;
+import static tech.aroma.banana.thrift.assertions.BananaAssertions.validTokenIn;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.DecoratorPattern.Role.CONCRETE_DECORATOR;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;

@@ -31,8 +31,8 @@ import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
 import static tech.aroma.banana.notification.service.NotificationAssertions.validEvent;
-import static tech.aroma.banana.thrift.functions.BananaAssertions.checkNotNull;
-import static tech.aroma.banana.thrift.functions.BananaAssertions.withMessage;
+import static tech.aroma.banana.thrift.assertions.BananaAssertions.checkNotNull;
+import static tech.aroma.banana.thrift.assertions.BananaAssertions.withMessage;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CLIENT;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
