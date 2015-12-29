@@ -18,6 +18,7 @@ package tech.aroma.banana.notification.service.pigeon;
 
 import com.google.gson.JsonObject;
 import java.util.Objects;
+import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.banana.thrift.channels.SlackChannel;
@@ -39,14 +40,22 @@ import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.n
  */
 @Internal
 @StrategyPattern(role = CONCRETE_BEHAVIOR)
-class SlackChannelPigeon implements Pigeon<SlackChannel>
+final class SlackChannelPigeon implements Pigeon<SlackChannel>
 {
 
     private final static Logger LOG = LoggerFactory.getLogger(SlackChannelPigeon.class);
 
     static final String SLACK_API_URL = "https://slack.com/api/chat.postMessage";
 
-    private AlchemyHttp http;
+    private final AlchemyHttp http;
+
+    @Inject
+    SlackChannelPigeon(AlchemyHttp http)
+    {
+        checkThat(http).is(notNull());
+
+        this.http = http;
+    }
 
     @Override
     public void deliverMessageTo(Event message, SlackChannel channel)
@@ -77,14 +86,14 @@ class SlackChannelPigeon implements Pigeon<SlackChannel>
         }
         catch (Exception ex)
         {
-            LOG.error("Failed to send message to Slack: {}", ex);
+            LOG.error("Failed to send message to Slack: {}", message, ex);
             return;
         }
         
         LOG.info("Successfully posted message to Slack: {}", response);
     }
 
-    private static class SlackRequest
+    static class SlackRequest
     {
 
         private String token;
@@ -146,7 +155,7 @@ class SlackChannelPigeon implements Pigeon<SlackChannel>
 
     }
 
-    private static class SlackResponse
+    static class SlackResponse
     {
 
         private String ok;
