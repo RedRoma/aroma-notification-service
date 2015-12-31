@@ -21,7 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import tech.aroma.banana.thrift.channels.SlackChannel;
-import tech.aroma.banana.thrift.notifications.Event;
+import tech.aroma.banana.thrift.events.Event;
 import tech.sirwellington.alchemy.http.AlchemyHttp;
 import tech.sirwellington.alchemy.http.mock.AlchemyHttpMock;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;

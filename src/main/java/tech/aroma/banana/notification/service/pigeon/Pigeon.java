@@ -19,8 +19,8 @@ package tech.aroma.banana.notification.service.pigeon;
 
 import org.apache.thrift.TBase;
 import tech.aroma.banana.thrift.channels.BananaChannel;
+import tech.aroma.banana.thrift.events.Event;
 import tech.aroma.banana.thrift.exceptions.OperationFailedException;
-import tech.aroma.banana.thrift.notifications.Event;
 import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
 
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.INTERFACE;

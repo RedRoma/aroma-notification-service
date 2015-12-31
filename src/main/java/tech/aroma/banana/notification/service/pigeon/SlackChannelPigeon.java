@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.banana.thrift.channels.SlackChannel;
-import tech.aroma.banana.thrift.notifications.Event;
+import tech.aroma.banana.thrift.events.Event;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
 import tech.sirwellington.alchemy.http.AlchemyHttp;

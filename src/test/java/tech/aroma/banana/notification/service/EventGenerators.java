@@ -21,13 +21,13 @@ package tech.aroma.banana.notification.service;
 import java.time.Instant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.banana.thrift.notifications.ApplicationSentMessage;
-import tech.aroma.banana.thrift.notifications.ApplicationTokenRegenerated;
-import tech.aroma.banana.thrift.notifications.ApplicationTokenRenewed;
-import tech.aroma.banana.thrift.notifications.Event;
-import tech.aroma.banana.thrift.notifications.EventType;
-import tech.aroma.banana.thrift.notifications.HealthCheckBackToNormal;
-import tech.aroma.banana.thrift.notifications.HealthCheckFailed;
+import tech.aroma.banana.thrift.events.ApplicationSentMessage;
+import tech.aroma.banana.thrift.events.ApplicationTokenRegenerated;
+import tech.aroma.banana.thrift.events.ApplicationTokenRenewed;
+import tech.aroma.banana.thrift.events.Event;
+import tech.aroma.banana.thrift.events.EventType;
+import tech.aroma.banana.thrift.events.HealthCheckBackToNormal;
+import tech.aroma.banana.thrift.events.HealthCheckFailed;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
@@ -35,7 +35,6 @@ import tech.sirwellington.alchemy.generator.TimeGenerators;
 
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
-import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 
 /**
