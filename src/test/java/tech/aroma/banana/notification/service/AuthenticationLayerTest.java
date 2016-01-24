@@ -22,7 +22,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import tech.aroma.banana.thrift.authentication.AuthenticationToken;
-import tech.aroma.banana.thrift.authentication.UserToken;
 import tech.aroma.banana.thrift.authentication.service.AuthenticationService;
 import tech.aroma.banana.thrift.authentication.service.VerifyTokenRequest;
 import tech.aroma.banana.thrift.exceptions.InvalidTokenException;
@@ -70,6 +69,7 @@ public class AuthenticationLayerTest
     @GenerateString(HEXADECIMAL)
     private String tokenId;
     
+    @GeneratePojo
     private AuthenticationToken token;
     
     private AuthenticationLayer instance;
@@ -84,11 +84,7 @@ public class AuthenticationLayerTest
         when(delegate.sendNotification(sendNotificationRequest))
             .thenReturn(sendNotificationResponse);
         
-        UserToken userToken = new UserToken()
-        .setTokenId(tokenId);
-        token = new AuthenticationToken();
-        token.setUserToken(userToken);
-        
+        token.setTokenId(tokenId);
         sendNotificationRequest.token = token;
     }
 

@@ -26,8 +26,8 @@ import tech.aroma.banana.thrift.channels.Email;
 import tech.aroma.banana.thrift.channels.SlackChannel;
 import tech.aroma.banana.thrift.channels.SlackUsername;
 import tech.aroma.banana.thrift.endpoint.Endpoint;
+import tech.aroma.banana.thrift.endpoint.HttpThriftEndpoint;
 import tech.aroma.banana.thrift.endpoint.TcpEndpoint;
-import tech.aroma.banana.thrift.endpoint.ThriftHttpEndpoint;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.generator.PeopleGenerators;
@@ -100,10 +100,10 @@ public final class ChannelGenerators
             }
             else
             {
-                ThriftHttpEndpoint http = new ThriftHttpEndpoint()
+                HttpThriftEndpoint http = new HttpThriftEndpoint()
                 .setUrl("http://" + one(popularEmailDomains()));
                 
-                endpoint.setThriftHttp(http);
+                endpoint.setHttpThrift(http);
             }
             
             return endpoint;
