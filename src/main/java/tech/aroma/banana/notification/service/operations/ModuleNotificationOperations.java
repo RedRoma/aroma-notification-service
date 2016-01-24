@@ -30,9 +30,9 @@ import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
  *
  * @author SirWellington
  */
-public final class NotificationServiceOperationsModule extends AbstractModule
+public final class ModuleNotificationOperations extends AbstractModule
 {
-    private final static Logger LOG = LoggerFactory.getLogger(NotificationServiceOperationsModule.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ModuleNotificationOperations.class);
 
     @Override
     protected void configure()
