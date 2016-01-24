@@ -150,6 +150,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
+                            <useUniqueVersions>false</useUniqueVersions>
                             <mainClass>tech.aroma.banana.notification.service.server.TcpServer</mainClass>
                         </manifest>
                     </archive>
