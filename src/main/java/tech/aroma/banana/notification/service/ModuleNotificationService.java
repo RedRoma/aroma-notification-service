@@ -29,9 +29,9 @@ import tech.aroma.banana.thrift.notification.service.NotificationService;
  *
  * @author SirWellington
  */
-public final class NotificationServiceModule extends AbstractModule
+public final class ModuleNotificationService extends AbstractModule
 {
-    private final static Logger LOG = LoggerFactory.getLogger(NotificationServiceModule.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ModuleNotificationService.class);
 
     @Override
     protected void configure()
