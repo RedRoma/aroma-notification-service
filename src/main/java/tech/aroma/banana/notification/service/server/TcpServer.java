@@ -54,7 +54,7 @@ public final class TcpServer
         NotificationService.Processor processor = new NotificationService.Processor<>(bananaService);
 
         TServerSocket socket = new TServerSocket(PORT);
-        socket.getServerSocket().setSoTimeout((int) SECONDS.toMillis(30));
+        socket.getServerSocket().setSoTimeout((int) SECONDS.toMillis(60));
 
         TThreadPoolServer.Args serverArgs = new TThreadPoolServer.Args(socket)
             .protocolFactory(new TBinaryProtocol.Factory())
