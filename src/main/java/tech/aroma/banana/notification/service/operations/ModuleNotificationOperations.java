@@ -19,9 +19,14 @@ package tech.aroma.banana.notification.service.operations;
 
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
+import org.apache.thrift.TBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tech.aroma.banana.notification.service.pigeon.Pigeon;
+import tech.aroma.banana.notification.service.pigeon.PigeonFactory;
+import tech.aroma.banana.thrift.channels.BananaChannel;
 import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
@@ -39,6 +44,19 @@ public final class ModuleNotificationOperations extends AbstractModule
     {
         bind(new TypeLiteral<ThriftOperation<SendNotificationRequest,SendNotificationResponse>>() {})
             .to(SendNotificationOperation.class);
+    }
+    
+    @Provides
+    PigeonFactory providePigeonFactory()
+    {
+        return new PigeonFactory()
+        {
+            @Override
+            public <C extends TBase> Pigeon<C> getPigeonFor(BananaChannel bananaChannel) throws IllegalArgumentException
+            {
+                return null;
+            }
+        };
     }
 
 }

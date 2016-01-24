@@ -27,6 +27,7 @@ import tech.aroma.banana.thrift.channels.BananaChannel;
  * 
  * @author SirWellington
  */
+@FunctionalInterface
 public interface PigeonFactory 
 {
     <C extends TBase> Pigeon<C> getPigeonFor(BananaChannel bananaChannel) throws IllegalArgumentException;
