@@ -45,47 +45,44 @@ import static tech.sirwellington.alchemy.generator.NumberGenerators.doubles;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateString.Type.HEXADECIMAL;
 
-
 /**
  *
  * @author SirWellington
  */
 @Repeat(100)
 @RunWith(AlchemyTestRunner.class)
-public class AuthenticationLayerTest 
+public class AuthenticationLayerTest
 {
 
     @Mock
     private AuthenticationService.Iface authenticationService;
-    
+
     @Mock
     private NotificationService.Iface delegate;
-    
+
     @GeneratePojo
     private SendNotificationRequest sendNotificationRequest;
     @GeneratePojo
     private SendNotificationResponse sendNotificationResponse;
-    
+
     @GenerateString(HEXADECIMAL)
     private String tokenId;
-    
+
     @GeneratePojo
     private AuthenticationToken token;
-    
+
     private AuthenticationLayer instance;
-    
+
     @Before
     public void setUp() throws TException
     {
         instance = new AuthenticationLayer(authenticationService, delegate);
-        
+
         verifyZeroInteractions(authenticationService, delegate);
-        
-        when(delegate.sendNotification(sendNotificationRequest))
-            .thenReturn(sendNotificationResponse);
-        
-        token.setTokenId(tokenId);
-        sendNotificationRequest.token = token;
+
+        setupMocks();
+        setupData();
+
     }
 
     @DontRepeat
@@ -94,18 +91,17 @@ public class AuthenticationLayerTest
     {
         assertThrows(() -> new AuthenticationLayer(null, delegate))
             .isInstanceOf(IllegalArgumentException.class);
-        
+
         assertThrows(() -> new AuthenticationLayer(authenticationService, null))
             .isInstanceOf(IllegalArgumentException.class);
     }
-    
-    
+
     @Test
     public void testGetApiVersion() throws Exception
     {
         double expected = one(doubles(1.0, 10.0));
         when(delegate.getApiVersion()).thenReturn(expected);
-        
+
         double result = instance.getApiVersion();
         assertThat(result, is(expected));
         verify(delegate).getApiVersion();
@@ -118,28 +114,42 @@ public class AuthenticationLayerTest
         assertThat(response, is(sendNotificationResponse));
         verify(delegate).sendNotification(sendNotificationRequest);
     }
-    
+
     @Test
     public void testSendNotificationWithInvalidToken() throws Exception
     {
         VerifyTokenRequest request = new VerifyTokenRequest()
             .setTokenId(tokenId);
-        
+
         when(authenticationService.verifyToken(request))
             .thenThrow(new InvalidTokenException());
-        
+
         assertThrows(() -> instance.sendNotification(sendNotificationRequest))
             .isInstanceOf(InvalidTokenException.class);
     }
-    
+
     @Test
     public void testSendNotificationWhenDelegateThrows() throws Exception
     {
         when(delegate.sendNotification(sendNotificationRequest))
             .thenThrow(new OperationFailedException());
-        
+
         assertThrows(() -> instance.sendNotification(sendNotificationRequest))
             .isInstanceOf(OperationFailedException.class);
+    }
+
+    private void setupData()
+    {
+
+        token.setTokenId(tokenId);
+        sendNotificationRequest.token = token;
+        token.unsetOwnerId();
+    }
+
+    private void setupMocks() throws TException
+    {
+        when(delegate.sendNotification(sendNotificationRequest))
+            .thenReturn(sendNotificationResponse);
     }
 
 }
