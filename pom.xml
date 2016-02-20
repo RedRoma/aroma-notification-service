@@ -96,7 +96,7 @@
 
 
         <!--=======================-->
-        <!--AROMA-->
+        <!--AROMA DEPENDENCIES-->
         <!--=======================-->
         <dependency>
             <groupId>${project.groupId}</groupId>
