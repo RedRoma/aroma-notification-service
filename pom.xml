@@ -13,7 +13,7 @@
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
-    <url>https://github.com/AromaTech/aroma-notification-service</url>
+    <url>https://github.com/RedRoma/aroma-notification-service</url>
     <description>
         Part of the Banana Service Project.
         Simplicity is paramount.
@@ -24,13 +24,13 @@
 
     <issueManagement>
         <system>GitHub Issues</system>
-        <url>https://github.com/AromaTech/aroma-notification-service/issues</url>
+        <url>https://github.com/RedRoma/aroma-notification-service/issues</url>
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:AromaTech/aroma-notification-service.git</connection>
-        <developerConnection>scm:git:git@github.com:AromaTech/aroma-notification-service.git</developerConnection>
-        <url>git@github.com:AromaTech/aroma-notification-service.git</url>
+        <connection>scm:git:git@github.com:RedRoma/aroma-notification-service.git</connection>
+        <developerConnection>scm:git:git@github.com:RedRoma/aroma-notification-service.git</developerConnection>
+        <url>git@github.com:RedRoma/aroma-notification-service.git</url>
     </scm>
 
     <inceptionYear>2015</inceptionYear>
