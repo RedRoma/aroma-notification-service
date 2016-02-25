@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package tech.aroma.banana.notification.service.operations;
+package tech.aroma.notification.service.operations;
 
 import javax.inject.Inject;
 import org.apache.thrift.TBase;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.banana.notification.service.pigeon.Pigeon;
-import tech.aroma.banana.notification.service.pigeon.PigeonFactory;
+import tech.aroma.notification.service.pigeon.Pigeon;
+import tech.aroma.notification.service.pigeon.PigeonFactory;
 import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.thrift.notification.service.SendNotificationResponse;
@@ -30,7 +30,7 @@ import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
-import static tech.aroma.banana.notification.service.NotificationAssertions.validEvent;
+import static tech.aroma.notification.service.NotificationAssertions.validEvent;
 import static tech.aroma.thrift.assertions.AromaAssertions.checkNotNull;
 import static tech.aroma.thrift.assertions.AromaAssertions.withMessage;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CLIENT;

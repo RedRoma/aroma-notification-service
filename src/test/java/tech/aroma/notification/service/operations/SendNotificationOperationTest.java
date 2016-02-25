@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tech.aroma.banana.notification.service.operations;
+package tech.aroma.notification.service.operations;
 
 import java.util.List;
 import org.junit.Before;
@@ -22,8 +22,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import tech.aroma.banana.notification.service.pigeon.Pigeon;
-import tech.aroma.banana.notification.service.pigeon.PigeonFactory;
+import tech.aroma.notification.service.pigeon.Pigeon;
+import tech.aroma.notification.service.pigeon.PigeonFactory;
 import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.exceptions.InvalidArgumentException;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
@@ -38,8 +38,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static tech.aroma.banana.notification.service.ChannelGenerators.channels;
-import static tech.aroma.banana.notification.service.EventGenerators.events;
+import static tech.aroma.notification.service.ChannelGenerators.channels;
+import static tech.aroma.notification.service.EventGenerators.events;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;

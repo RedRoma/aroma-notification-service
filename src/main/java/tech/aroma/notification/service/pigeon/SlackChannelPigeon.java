@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tech.aroma.banana.notification.service.pigeon;
+package tech.aroma.notification.service.pigeon;
 
 import com.google.gson.JsonObject;
 import java.util.Objects;
@@ -27,7 +27,7 @@ import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
 import tech.sirwellington.alchemy.http.AlchemyHttp;
 
-import static tech.aroma.banana.notification.service.NotificationAssertions.validEvent;
+import static tech.aroma.notification.service.NotificationAssertions.validEvent;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CONCRETE_BEHAVIOR;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;

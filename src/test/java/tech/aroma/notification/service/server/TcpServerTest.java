@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tech.aroma.banana.notification.service.server;
+package tech.aroma.notification.service.server;
 
 import com.google.common.collect.Lists;
 import java.util.List;

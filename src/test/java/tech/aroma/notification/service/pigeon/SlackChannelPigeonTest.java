@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tech.aroma.banana.notification.service.pigeon;
+package tech.aroma.notification.service.pigeon;
 
 import java.net.MalformedURLException;
 import org.junit.Before;
@@ -30,7 +30,7 @@ import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static tech.aroma.banana.notification.service.EventGenerators.events;
+import static tech.aroma.notification.service.EventGenerators.events;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 
 

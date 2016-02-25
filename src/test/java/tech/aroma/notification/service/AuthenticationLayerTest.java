@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tech.aroma.banana.notification.service;
+package tech.aroma.notification.service;
 
 import org.apache.thrift.TException;
 import org.junit.Before;

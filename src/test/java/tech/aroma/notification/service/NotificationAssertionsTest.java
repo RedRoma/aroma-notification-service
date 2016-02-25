@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tech.aroma.banana.notification.service;
+package tech.aroma.notification.service;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static tech.aroma.banana.notification.service.ChannelGenerators.channels;
-import static tech.aroma.banana.notification.service.EventGenerators.events;
+import static tech.aroma.notification.service.ChannelGenerators.channels;
+import static tech.aroma.notification.service.EventGenerators.events;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.TimeGenerators.pastInstants;

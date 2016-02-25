@@ -15,7 +15,7 @@
  */
 
  
-package tech.aroma.banana.notification.service.operations;
+package tech.aroma.notification.service.operations;
 
 
 import com.google.inject.AbstractModule;
@@ -24,8 +24,8 @@ import com.google.inject.TypeLiteral;
 import org.apache.thrift.TBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.banana.notification.service.pigeon.Pigeon;
-import tech.aroma.banana.notification.service.pigeon.PigeonFactory;
+import tech.aroma.notification.service.pigeon.Pigeon;
+import tech.aroma.notification.service.pigeon.PigeonFactory;
 import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.thrift.notification.service.SendNotificationResponse;

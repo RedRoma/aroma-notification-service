@@ -15,7 +15,7 @@
  */
 
  
-package tech.aroma.banana.notification.service;
+package tech.aroma.notification.service;
 
 
 import java.time.Instant;

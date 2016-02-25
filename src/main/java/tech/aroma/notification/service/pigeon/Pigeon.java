@@ -15,7 +15,7 @@
  */
 
 
-package tech.aroma.banana.notification.service.pigeon;
+package tech.aroma.notification.service.pigeon;
 
 import org.apache.thrift.TBase;
 import tech.aroma.thrift.channels.AromaChannel;
