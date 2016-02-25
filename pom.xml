@@ -15,11 +15,11 @@
 
     <url>https://github.com/RedRoma/aroma-notification-service</url>
     <description>
-        Part of the Banana Service Project.
+        Part of the Aroma Project.
         Simplicity is paramount.
         
         The Notification Service is responsible for managing and sending
-        Notifications to device channels
+        Notifications to Aroma Channels.
     </description>
 
     <issueManagement>
