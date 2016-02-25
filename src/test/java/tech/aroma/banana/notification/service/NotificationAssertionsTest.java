@@ -19,9 +19,9 @@ package tech.aroma.banana.notification.service;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import tech.aroma.banana.thrift.channels.BananaChannel;
-import tech.aroma.banana.thrift.events.Event;
-import tech.aroma.banana.thrift.events.EventType;
+import tech.aroma.thrift.channels.AromaChannel;
+import tech.aroma.thrift.events.Event;
+import tech.aroma.thrift.events.EventType;
 import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
 import tech.sirwellington.alchemy.arguments.FailedAssertionException;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
@@ -46,7 +46,7 @@ import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThr
 public class NotificationAssertionsTest
 {
 
-    private BananaChannel channel;
+    private AromaChannel channel;
     private Event event;
 
     @Before
@@ -65,14 +65,14 @@ public class NotificationAssertionsTest
     }
 
     @Test
-    public void testValidBananaChannel()
+    public void testValidAromaChannel()
     {
-        AlchemyAssertion<BananaChannel> assertion = NotificationAssertions.validBananaChannel();
+        AlchemyAssertion<AromaChannel> assertion = NotificationAssertions.validBananaChannel();
         assertThat(assertion, notNullValue());
 
         assertion.check(channel);
 
-        BananaChannel empty = new BananaChannel();
+        AromaChannel empty = new AromaChannel();
         assertThrows(() -> assertion.check(empty));
     }
 

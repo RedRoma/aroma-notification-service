@@ -20,18 +20,18 @@ import javax.inject.Inject;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.banana.thrift.exceptions.InvalidArgumentException;
-import tech.aroma.banana.thrift.exceptions.InvalidTokenException;
-import tech.aroma.banana.thrift.exceptions.OperationFailedException;
-import tech.aroma.banana.thrift.notification.service.NotificationService;
-import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
-import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
-import tech.aroma.banana.thrift.service.BananaServiceConstants;
+import tech.aroma.thrift.exceptions.InvalidArgumentException;
+import tech.aroma.thrift.exceptions.InvalidTokenException;
+import tech.aroma.thrift.exceptions.OperationFailedException;
+import tech.aroma.thrift.notification.service.NotificationService;
+import tech.aroma.thrift.notification.service.SendNotificationRequest;
+import tech.aroma.thrift.notification.service.SendNotificationResponse;
+import tech.aroma.thrift.service.AromaServiceConstants;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.designs.patterns.DecoratorPattern;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
-import static tech.aroma.banana.thrift.assertions.BananaAssertions.checkNotNull;
+import static tech.aroma.thrift.assertions.AromaAssertions.checkNotNull;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.DecoratorPattern.Role.CONCRETE_COMPONENT;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
@@ -61,7 +61,7 @@ final class NotificationServiceBase implements NotificationService.Iface
     @Override
     public double getApiVersion() throws TException
     {
-        return BananaServiceConstants.API_VERSION;
+        return AromaServiceConstants.API_VERSION;
     }
 
     @Override

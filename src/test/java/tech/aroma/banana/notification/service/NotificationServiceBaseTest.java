@@ -20,10 +20,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import tech.aroma.banana.thrift.exceptions.InvalidArgumentException;
-import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
-import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
-import tech.aroma.banana.thrift.service.BananaServiceConstants;
+import tech.aroma.thrift.exceptions.InvalidArgumentException;
+import tech.aroma.thrift.notification.service.SendNotificationRequest;
+import tech.aroma.thrift.notification.service.SendNotificationResponse;
+import tech.aroma.thrift.service.AromaServiceConstants;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
 import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.GeneratePojo;
@@ -73,7 +73,7 @@ public class NotificationServiceBaseTest
     public void testGetApiVersion() throws Exception
     {
         double result = instance.getApiVersion();
-        assertThat(result, is(BananaServiceConstants.API_VERSION));
+        assertThat(result, is(AromaServiceConstants.API_VERSION));
     }
 
     @Test

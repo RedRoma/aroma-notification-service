@@ -27,8 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.banana.notification.service.ModuleNotificationService;
 import tech.aroma.banana.notification.service.operations.ModuleNotificationOperations;
-import tech.aroma.banana.thrift.notification.service.NotificationService;
-import tech.aroma.banana.thrift.notification.service.NotificationServiceConstants;
+import tech.aroma.thrift.notification.service.NotificationService;
+import tech.aroma.thrift.notification.service.NotificationServiceConstants;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 
 import static java.util.concurrent.TimeUnit.SECONDS;

@@ -26,9 +26,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.banana.notification.service.pigeon.Pigeon;
 import tech.aroma.banana.notification.service.pigeon.PigeonFactory;
-import tech.aroma.banana.thrift.channels.BananaChannel;
-import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
-import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
+import tech.aroma.thrift.channels.AromaChannel;
+import tech.aroma.thrift.notification.service.SendNotificationRequest;
+import tech.aroma.thrift.notification.service.SendNotificationResponse;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
 /**
@@ -52,7 +52,7 @@ public final class ModuleNotificationOperations extends AbstractModule
         return new PigeonFactory()
         {
             @Override
-            public <C extends TBase> Pigeon<C> getPigeonFor(BananaChannel bananaChannel) throws IllegalArgumentException
+            public <C extends TBase> Pigeon<C> getPigeonFor(AromaChannel bananaChannel) throws IllegalArgumentException
             {
                 return null;
             }

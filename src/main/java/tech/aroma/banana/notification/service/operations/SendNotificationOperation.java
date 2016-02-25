@@ -23,16 +23,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.banana.notification.service.pigeon.Pigeon;
 import tech.aroma.banana.notification.service.pigeon.PigeonFactory;
-import tech.aroma.banana.thrift.channels.BananaChannel;
-import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
-import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
+import tech.aroma.thrift.channels.AromaChannel;
+import tech.aroma.thrift.notification.service.SendNotificationRequest;
+import tech.aroma.thrift.notification.service.SendNotificationResponse;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
 import static tech.aroma.banana.notification.service.NotificationAssertions.validEvent;
-import static tech.aroma.banana.thrift.assertions.BananaAssertions.checkNotNull;
-import static tech.aroma.banana.thrift.assertions.BananaAssertions.withMessage;
+import static tech.aroma.thrift.assertions.AromaAssertions.checkNotNull;
+import static tech.aroma.thrift.assertions.AromaAssertions.withMessage;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CLIENT;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
@@ -80,7 +80,7 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
         // Send the pigeon off to send the event
         //Each pigeon is responsible for sending the message to the right place
         int success = 0;
-        for(BananaChannel channel : request.channels)
+        for(AromaChannel channel : request.channels)
         {
             Pigeon<? super TBase> pigeon = pigeonFactory.getPigeonFor(channel);
             

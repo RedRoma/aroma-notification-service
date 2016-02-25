@@ -20,14 +20,14 @@ package tech.aroma.banana.notification.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.banana.thrift.channels.BananaChannel;
-import tech.aroma.banana.thrift.channels.CustomChannel;
-import tech.aroma.banana.thrift.channels.Email;
-import tech.aroma.banana.thrift.channels.SlackChannel;
-import tech.aroma.banana.thrift.channels.SlackUsername;
-import tech.aroma.banana.thrift.endpoint.Endpoint;
-import tech.aroma.banana.thrift.endpoint.HttpThriftEndpoint;
-import tech.aroma.banana.thrift.endpoint.TcpEndpoint;
+import tech.aroma.thrift.channels.AromaChannel;
+import tech.aroma.thrift.channels.CustomChannel;
+import tech.aroma.thrift.channels.Email;
+import tech.aroma.thrift.channels.SlackChannel;
+import tech.aroma.thrift.channels.SlackUsername;
+import tech.aroma.thrift.endpoint.Endpoint;
+import tech.aroma.thrift.endpoint.HttpThriftEndpoint;
+import tech.aroma.thrift.endpoint.TcpEndpoint;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.generator.PeopleGenerators;
@@ -120,12 +120,12 @@ public final class ChannelGenerators
     }
     
 
-    public static AlchemyGenerator<BananaChannel> channels()
+    public static AlchemyGenerator<AromaChannel> channels()
     {
         
         return () ->
         {
-            BananaChannel channel = new BananaChannel();
+            AromaChannel channel = new AromaChannel();
             
             int number = one(integers(1, 6));
             

@@ -24,10 +24,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import tech.aroma.banana.notification.service.pigeon.Pigeon;
 import tech.aroma.banana.notification.service.pigeon.PigeonFactory;
-import tech.aroma.banana.thrift.channels.BananaChannel;
-import tech.aroma.banana.thrift.exceptions.InvalidArgumentException;
-import tech.aroma.banana.thrift.notification.service.SendNotificationRequest;
-import tech.aroma.banana.thrift.notification.service.SendNotificationResponse;
+import tech.aroma.thrift.channels.AromaChannel;
+import tech.aroma.thrift.exceptions.InvalidArgumentException;
+import tech.aroma.thrift.notification.service.SendNotificationRequest;
+import tech.aroma.thrift.notification.service.SendNotificationResponse;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
 import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.GeneratePojo;
@@ -71,7 +71,7 @@ public class SendNotificationOperationTest
         
         verifyZeroInteractions(pigeonFactory);
         
-        List<BananaChannel> channels = listOf(channels());
+        List<AromaChannel> channels = listOf(channels());
         request.setChannels(channels);
         request.setEvent(one(events()));
     }

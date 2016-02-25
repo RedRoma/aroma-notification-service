@@ -18,26 +18,26 @@
 package tech.aroma.banana.notification.service.pigeon;
 
 import org.apache.thrift.TBase;
-import tech.aroma.banana.thrift.channels.BananaChannel;
-import tech.aroma.banana.thrift.events.Event;
-import tech.aroma.banana.thrift.exceptions.OperationFailedException;
+import tech.aroma.thrift.channels.AromaChannel;
+import tech.aroma.thrift.events.Event;
+import tech.aroma.thrift.exceptions.OperationFailedException;
 import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
 
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.INTERFACE;
 
 
 /**
- * A Pigeon is responsible for sending a Message to a particular {@link BananaChannel}.
+ * A Pigeon is responsible for sending a Message to a particular {@link AromaChannel}.
  * 
  * @author SirWellington
  * 
- * @param <C> The particular {@link BananaChannel} an implementation delivers.
+ * @param <C> The particular {@link AromaChannel} an implementation delivers.
  */
 @StrategyPattern(role = INTERFACE)
 public interface Pigeon <C extends TBase>
 {
     /**
-     * Delivers a message to a particular {@link BananaChannel}.
+     * Delivers a message to a particular {@link AromaChannel}.
      * 
      * @param message
      * @param channel

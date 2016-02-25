@@ -20,9 +20,9 @@ package tech.aroma.banana.notification.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.banana.thrift.channels.BananaChannel;
-import tech.aroma.banana.thrift.events.Event;
-import tech.aroma.banana.thrift.events.EventType;
+import tech.aroma.thrift.channels.AromaChannel;
+import tech.aroma.thrift.events.Event;
+import tech.aroma.thrift.events.EventType;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
@@ -48,7 +48,7 @@ public final class NotificationAssertions
         throw new IllegalAccessException("cannot instantiate");
     }
     
-    public static AlchemyAssertion<BananaChannel> validBananaChannel()
+    public static AlchemyAssertion<AromaChannel> validBananaChannel()
     {
         return channel ->
         {
@@ -58,13 +58,13 @@ public final class NotificationAssertions
             
             if (!isSet(channel))
             {
-                throw new FailedAssertionException("BananaChannel has no value: " + channel);
+                throw new FailedAssertionException("AromaChannel has no value: " + channel);
             }
             
         };
     }
     
-    private static boolean isSet(BananaChannel channel)
+    private static boolean isSet(AromaChannel channel)
     {
         if (channel.isSetCustomChannel())
         {

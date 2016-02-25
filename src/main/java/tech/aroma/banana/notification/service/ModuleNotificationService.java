@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.aroma.banana.thrift.notification.service.NotificationService;
+import tech.aroma.thrift.notification.service.NotificationService;
 
 /**
  *

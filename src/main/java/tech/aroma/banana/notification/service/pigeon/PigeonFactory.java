@@ -18,17 +18,17 @@
 package tech.aroma.banana.notification.service.pigeon;
 
 import org.apache.thrift.TBase;
-import tech.aroma.banana.thrift.channels.BananaChannel;
+import tech.aroma.thrift.channels.AromaChannel;
 
 
 /**
  * The pigeon Factory is responsible for determining which {@link Pigeon} is 
- * appropriate for a particular {@link BananaChannel}.
+ * appropriate for a particular {@link AromaChannel}.
  * 
  * @author SirWellington
  */
 @FunctionalInterface
 public interface PigeonFactory 
 {
-    <C extends TBase> Pigeon<C> getPigeonFor(BananaChannel bananaChannel) throws IllegalArgumentException;
+    <C extends TBase> Pigeon<C> getPigeonFor(AromaChannel bananaChannel) throws IllegalArgumentException;
 }
