@@ -16,6 +16,7 @@
 
 package tech.aroma.notification.service.operations;
 
+import java.util.Map;
 import javax.inject.Inject;
 import org.apache.thrift.TBase;
 import org.apache.thrift.TException;
@@ -23,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.notification.service.pigeon.Pigeon;
 import tech.aroma.notification.service.pigeon.PigeonFactory;
+import tech.aroma.thrift.User;
 import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.thrift.notification.service.SendNotificationResponse;
@@ -36,7 +38,6 @@ import static tech.aroma.thrift.assertions.AromaAssertions.withMessage;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CLIENT;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
-import static tech.sirwellington.alchemy.arguments.assertions.CollectionAssertions.nonEmptyList;
 import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 
 /**
@@ -71,17 +72,16 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
             .throwing(withMessage("Invalid Event Type"))
             .is(validEvent());
         
-        checkThat(request.channels)
-            .throwing(withMessage("missing Channels to send notifications to"))
-            .is(nonEmptyList());
         
         // For each Channel in the request...
         // Obtain a 'courier' or a 'pigeon' type from a factory.
         // Send the pigeon off to send the event
         //Each pigeon is responsible for sending the message to the right place
         int success = 0;
-        for(AromaChannel channel : request.channels)
+        for(Map.Entry<AromaChannel, User> channelByUser : request.channels.entrySet())
         {
+            AromaChannel channel = channelByUser.getKey();
+            
             Pigeon<? super TBase> pigeon = pigeonFactory.getPigeonFor(channel);
             
             if (pigeon == null)

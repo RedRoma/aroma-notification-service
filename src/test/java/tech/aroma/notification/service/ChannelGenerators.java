@@ -20,9 +20,11 @@ package tech.aroma.notification.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tech.aroma.thrift.channels.AndroidDevice;
 import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.channels.CustomChannel;
 import tech.aroma.thrift.channels.Email;
+import tech.aroma.thrift.channels.IOSDevice;
 import tech.aroma.thrift.channels.SlackChannel;
 import tech.aroma.thrift.channels.SlackUsername;
 import tech.aroma.thrift.endpoint.Endpoint;
@@ -35,6 +37,7 @@ import tech.sirwellington.alchemy.generator.PeopleGenerators;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.BooleanGenerators.booleans;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.integers;
+import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 import static tech.sirwellington.alchemy.generator.PeopleGenerators.popularEmailDomains;
 import static tech.sirwellington.alchemy.generator.StringGenerators.alphabeticString;
 import static tech.sirwellington.alchemy.generator.StringGenerators.alphanumericString;
@@ -119,6 +122,15 @@ public final class ChannelGenerators
         };
     }
     
+    public static AlchemyGenerator<IOSDevice> iosDevices()
+    {
+        return pojos(IOSDevice.class);
+    }
+    
+    public static AlchemyGenerator<AndroidDevice> androidDevices()
+    {
+        return pojos(AndroidDevice.class);
+    }
 
     public static AlchemyGenerator<AromaChannel> channels()
     {
@@ -127,7 +139,7 @@ public final class ChannelGenerators
         {
             AromaChannel channel = new AromaChannel();
             
-            int number = one(integers(1, 6));
+            int number = one(integers(1, 8));
             
             switch(number)
             {
@@ -142,6 +154,12 @@ public final class ChannelGenerators
                     break;
                 case 4:
                     channel.setSlackUsername(one(slackUsernames()));
+                    break;
+                case 5:
+                    channel.setIosDevice(one(iosDevices()));
+                    break;
+                case 6:
+                    channel.setAndroidDevice(one(androidDevices()));
                     break;
                 default:
                     channel.setSlackChannel(one(slackChannels()));

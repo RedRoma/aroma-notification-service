@@ -16,7 +16,7 @@
 
 package tech.aroma.notification.service.operations;
 
-import java.util.List;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,15 +24,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import tech.aroma.notification.service.pigeon.Pigeon;
 import tech.aroma.notification.service.pigeon.PigeonFactory;
+import tech.aroma.thrift.User;
 import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.exceptions.InvalidArgumentException;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.thrift.notification.service.SendNotificationResponse;
+import tech.sirwellington.alchemy.generator.AlchemyGenerator;
 import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
 import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
 import tech.sirwellington.alchemy.test.junit.runners.GeneratePojo;
 import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
+import static java.util.stream.Collectors.toMap;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
@@ -42,6 +45,7 @@ import static tech.aroma.notification.service.ChannelGenerators.channels;
 import static tech.aroma.notification.service.EventGenerators.events;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.CollectionGenerators.listOf;
+import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 
 /**
@@ -55,7 +59,7 @@ public class SendNotificationOperationTest
 
     @Mock
     private PigeonFactory pigeonFactory;
-    
+
     @Mock
     private Pigeon pigeon;
 
@@ -65,17 +69,27 @@ public class SendNotificationOperationTest
     private SendNotificationOperation instance;
 
     @Before
-    public void setUp()
+    public void setUp() throws Exception
     {
         instance = new SendNotificationOperation(pigeonFactory);
-        
+
         verifyZeroInteractions(pigeonFactory);
-        
-        List<AromaChannel> channels = listOf(channels());
+
+        setupData();
+    }
+
+    private void setupData() throws Exception
+    {
+        AlchemyGenerator<User> users = pojos(User.class);
+
+        Map<AromaChannel, User> channels = listOf(channels())
+            .stream()
+            .collect(toMap(c -> c, c -> users.get()));
+
         request.setChannels(channels);
         request.setEvent(one(events()));
     }
-    
+
     @DontRepeat
     @Test
     public void testConstructor()
@@ -90,7 +104,7 @@ public class SendNotificationOperationTest
         SendNotificationResponse response = instance.process(request);
 
         assertThat(response, notNullValue());
-        
+
         verify(pigeonFactory, times(request.channels.size()))
             .getPigeonFor(Mockito.any());
     }

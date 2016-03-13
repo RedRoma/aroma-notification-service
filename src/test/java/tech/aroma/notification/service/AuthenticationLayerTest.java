@@ -60,8 +60,8 @@ public class AuthenticationLayerTest
     @Mock
     private NotificationService.Iface delegate;
 
-    @GeneratePojo
     private SendNotificationRequest sendNotificationRequest;
+
     @GeneratePojo
     private SendNotificationResponse sendNotificationResponse;
 
@@ -80,8 +80,8 @@ public class AuthenticationLayerTest
 
         verifyZeroInteractions(authenticationService, delegate);
 
-        setupMocks();
         setupData();
+        setupMocks();
 
     }
 
@@ -140,10 +140,12 @@ public class AuthenticationLayerTest
 
     private void setupData()
     {
-
         token.setTokenId(tokenId);
-        sendNotificationRequest.token = token;
         token.unsetOwnerId();
+
+        sendNotificationRequest = new SendNotificationRequest()
+            .setToken(token);
+
     }
 
     private void setupMocks() throws TException
