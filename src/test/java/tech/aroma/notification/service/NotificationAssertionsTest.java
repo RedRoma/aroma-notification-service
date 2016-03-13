@@ -36,6 +36,7 @@ import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.TimeGenerators.pastInstants;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
+import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 
 /**
  *
@@ -67,7 +68,7 @@ public class NotificationAssertionsTest
     @Test
     public void testValidAromaChannel()
     {
-        AlchemyAssertion<AromaChannel> assertion = NotificationAssertions.validBananaChannel();
+        AlchemyAssertion<AromaChannel> assertion = NotificationAssertions.validAromaChannel();
         assertThat(assertion, notNullValue());
 
         assertion.check(channel);

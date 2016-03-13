@@ -39,6 +39,8 @@ import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPa
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
+import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 
 /**
  *

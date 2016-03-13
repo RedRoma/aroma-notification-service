@@ -28,9 +28,9 @@ import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
 import tech.sirwellington.alchemy.arguments.FailedAssertionException;
 
-import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.equalTo;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
+import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.NumberAssertions.greaterThan;
 
 /**
@@ -48,7 +48,7 @@ public final class NotificationAssertions
         throw new IllegalAccessException("cannot instantiate");
     }
     
-    public static AlchemyAssertion<AromaChannel> validBananaChannel()
+    public static AlchemyAssertion<AromaChannel> validAromaChannel()
     {
         return channel ->
         {
@@ -80,12 +80,22 @@ public final class NotificationAssertions
         {
             return true;
         }
-        
-        if(channel.isSetSlackUsername())
+
+        if (channel.isSetSlackUsername())
         {
             return true;
         }
-        
+
+        if (channel.isSetIosDevice())
+        {
+            return true;
+        }
+
+        if (channel.isSetAndroidDevice())
+        {
+            return true;
+        }
+
         return false;
     }
 
