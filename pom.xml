@@ -87,6 +87,11 @@
         <!--=======================-->
         <dependency>
             <groupId>tech.sirwellington.alchemy</groupId>
+            <artifactId>alchemy-collections</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>tech.sirwellington.alchemy</groupId>
             <artifactId>alchemy-generator</artifactId>
             <scope>compile</scope>
         </dependency>

@@ -25,6 +25,7 @@ import org.mockito.Mockito;
 import tech.aroma.notification.service.pigeon.Pigeon;
 import tech.aroma.notification.service.pigeon.PigeonFactory;
 import tech.aroma.thrift.User;
+import tech.aroma.thrift.authentication.AuthenticationToken;
 import tech.aroma.thrift.channels.AromaChannel;
 import tech.aroma.thrift.exceptions.InvalidArgumentException;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
@@ -64,6 +65,8 @@ public class SendNotificationOperationTest
     private Pigeon pigeon;
 
     @GeneratePojo
+    private AuthenticationToken token;
+    
     private SendNotificationRequest request;
 
     private SendNotificationOperation instance;
@@ -84,10 +87,13 @@ public class SendNotificationOperationTest
 
         Map<AromaChannel, User> channels = listOf(channels())
             .stream()
+            .distinct()
             .collect(toMap(c -> c, c -> users.get()));
 
-        request.setChannels(channels);
-        request.setEvent(one(events()));
+        request = new SendNotificationRequest()
+            .setToken(token)
+            .setChannels(channels)
+            .setEvent(one(events()));
     }
 
     @DontRepeat
@@ -108,6 +114,18 @@ public class SendNotificationOperationTest
         verify(pigeonFactory, times(request.channels.size()))
             .getPigeonFor(Mockito.any());
     }
+    
+    @DontRepeat
+    @Test
+    public void testWithNoChannels() throws Exception
+    {
+        SendNotificationRequest noChannels = new SendNotificationRequest()
+            .setToken(token)
+            .setEvent(request.event);
+        
+        SendNotificationResponse response = instance.process(noChannels);
+        assertThat(response, notNullValue());
+    }
 
     @DontRepeat
     @Test
@@ -127,11 +145,8 @@ public class SendNotificationOperationTest
         assertThrows(() -> instance.process(noEvent))
             .isInstanceOf(InvalidArgumentException.class);
 
-        SendNotificationRequest noChannels = new SendNotificationRequest()
-            .setEvent(request.event);
+        
 
-        assertThrows(() -> instance.process(noChannels))
-            .isInstanceOf(InvalidArgumentException.class);
 
     }
 

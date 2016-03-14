@@ -22,6 +22,7 @@ import org.apache.thrift.TBase;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sir.wellington.alchemy.collections.maps.Maps;
 import tech.aroma.notification.service.pigeon.Pigeon;
 import tech.aroma.notification.service.pigeon.PigeonFactory;
 import tech.aroma.thrift.User;
@@ -36,11 +37,8 @@ import static tech.aroma.notification.service.NotificationAssertions.validEvent;
 import static tech.aroma.thrift.assertions.AromaAssertions.checkNotNull;
 import static tech.aroma.thrift.assertions.AromaAssertions.withMessage;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CLIENT;
-import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
-import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
-import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 
 /**
  *
@@ -74,6 +72,7 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
             .throwing(withMessage("Invalid Event Type"))
             .is(validEvent());
         
+        request.channels = Maps.nullToEmpty(request.channels);
         
         // For each Channel in the request...
         // Obtain a 'courier' or a 'pigeon' type from a factory.
@@ -99,7 +98,8 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
         
         LOG.debug("Sent event {} to {} channels", request.event, success);
         
-        SendNotificationResponse response = pojos(SendNotificationResponse.class).get();
+        SendNotificationResponse response = new SendNotificationResponse()
+            .setNotificationId("");
         
         return response;
     }
