@@ -21,6 +21,8 @@ package tech.aroma.notification.service;
 import java.time.Instant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tech.aroma.thrift.events.ApplicationDeleted;
+import tech.aroma.thrift.events.ApplicationFollowed;
 import tech.aroma.thrift.events.ApplicationSentMessage;
 import tech.aroma.thrift.events.ApplicationTokenRegenerated;
 import tech.aroma.thrift.events.ApplicationTokenRenewed;
@@ -28,6 +30,7 @@ import tech.aroma.thrift.events.Event;
 import tech.aroma.thrift.events.EventType;
 import tech.aroma.thrift.events.HealthCheckBackToNormal;
 import tech.aroma.thrift.events.HealthCheckFailed;
+import tech.aroma.thrift.events.OwnerAdded;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.access.NonInstantiable;
 import tech.sirwellington.alchemy.generator.AlchemyGenerator;
@@ -53,7 +56,7 @@ public final class EventGenerators
         {
             EventType eventType = new EventType();
             
-            int random = one(integers(1, 6));
+            int random = one(integers(1, 9));
             
             switch(random)
             {
@@ -71,6 +74,15 @@ public final class EventGenerators
                     break;
                 case 5:
                     eventType.setHealthCheckFailed(one(pojos(HealthCheckFailed.class)));
+                    break;
+                case 6:
+                    eventType.setApplicationDeleted(one(pojos(ApplicationDeleted.class)));
+                    break;
+                case 7:
+                    eventType.setApplicationFollowed(one(pojos(ApplicationFollowed.class)));
+                    break;
+                case 8:
+                    eventType.setOwnerAdded(one(pojos(OwnerAdded.class)));
                     break;
                 default:
                     eventType.setApplicationSentMessage(one(pojos(ApplicationSentMessage.class)));
