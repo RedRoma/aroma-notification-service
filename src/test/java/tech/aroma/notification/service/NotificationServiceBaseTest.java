@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import tech.aroma.thrift.authentication.AuthenticationToken;
 import tech.aroma.thrift.exceptions.InvalidArgumentException;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.thrift.notification.service.SendNotificationResponse;
@@ -33,6 +34,9 @@ import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static tech.aroma.notification.service.EventGenerators.events;
+import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
+import static tech.sirwellington.alchemy.generator.BooleanGenerators.booleans;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 
 /**
@@ -46,8 +50,12 @@ public class NotificationServiceBaseTest
     
     @Mock
     private ThriftOperation<SendNotificationRequest, SendNotificationResponse> sendNotificationOperation;
+    
     @GeneratePojo
+    private AuthenticationToken token;
+    
     private SendNotificationRequest sendNotificationRequest;
+    
     @GeneratePojo
     private SendNotificationResponse sendNotificationResponse;
 
@@ -59,6 +67,16 @@ public class NotificationServiceBaseTest
         instance = new NotificationServiceBase(sendNotificationOperation);
         
         verifyZeroInteractions(sendNotificationOperation);
+        
+        setupData();
+    }
+    
+    private void setupData()
+    {
+        sendNotificationRequest = new SendNotificationRequest()
+            .setToken(token)
+            .setStoreEvent(one(booleans()))
+            .setEvent(one(events()));
     }
     
     @DontRepeat
