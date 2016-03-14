@@ -34,7 +34,7 @@ import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static tech.aroma.notification.service.EventGenerators.events;
+import static tech.aroma.thrift.generators.EventGenerators.events;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.BooleanGenerators.booleans;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;

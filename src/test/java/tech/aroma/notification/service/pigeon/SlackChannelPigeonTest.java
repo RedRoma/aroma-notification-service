@@ -30,7 +30,7 @@ import tech.sirwellington.alchemy.test.junit.runners.Repeat;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static tech.aroma.notification.service.EventGenerators.events;
+import static tech.aroma.thrift.generators.EventGenerators.events;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 
 

@@ -70,13 +70,12 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
             .throwing(ex -> new InvalidArgumentException(ex.getMessage()))
             .is(good());
         
-        
         request.channels = Maps.nullToEmpty(request.channels);
         
         // For each Channel in the request...
         // Obtain a 'courier' or a 'pigeon' type from a factory.
         // Send the pigeon off to send the event
-        //Each pigeon is responsible for sending the message to the right place
+        // Each pigeon is responsible for sending the message to the right place
         int success = 0;
         for(Map.Entry<AromaChannel, User> channelByUser : request.channels.entrySet())
         {
