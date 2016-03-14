@@ -27,18 +27,18 @@ import tech.aroma.notification.service.pigeon.Pigeon;
 import tech.aroma.notification.service.pigeon.PigeonFactory;
 import tech.aroma.thrift.User;
 import tech.aroma.thrift.channels.AromaChannel;
+import tech.aroma.thrift.exceptions.InvalidArgumentException;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.thrift.notification.service.SendNotificationResponse;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern;
+import tech.sirwellington.alchemy.arguments.AlchemyAssertion;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
 import static tech.aroma.notification.service.NotificationAssertions.validEvent;
-import static tech.aroma.thrift.assertions.AromaAssertions.checkNotNull;
-import static tech.aroma.thrift.assertions.AromaAssertions.withMessage;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CLIENT;
-import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 
 /**
  *
@@ -66,11 +66,10 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
     @Override
     public SendNotificationResponse process(SendNotificationRequest request) throws TException
     {
-        checkNotNull(request, "request is missing");
+        checkThat(request)
+            .throwing(ex -> new InvalidArgumentException(ex.getMessage()))
+            .is(good());
         
-        checkThat(request.event)
-            .throwing(withMessage("Invalid Event Type"))
-            .is(validEvent());
         
         request.channels = Maps.nullToEmpty(request.channels);
         
@@ -102,6 +101,20 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
             .setNotificationId("");
         
         return response;
+    }
+
+    private AlchemyAssertion<SendNotificationRequest> good()
+    {
+        return request ->
+        {
+            checkThat(request)
+                .usingMessage("request missing")
+                .is(notNull());
+            
+            checkThat(request.event)
+                .usingMessage("Invalid Event Type")
+                .is(validEvent());
+        };
     }
 
 }
