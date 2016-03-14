@@ -48,18 +48,12 @@ public class SerializationTest
     {
 
         setupData();
-        setupMocks();
     }
 
     private void setupData() throws Exception
     {
         event = one(events());
         channel = one(channels());
-    }
-
-    private void setupMocks() throws Exception
-    {
-
     }
 
     @Test
