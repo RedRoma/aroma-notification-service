@@ -140,6 +140,7 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
+
         <!--=======================-->
         <!--LOGBACK-->
         <!--=======================-->
@@ -147,6 +148,15 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        
+        <!--=======================-->
+        <!--APPLE PUSH NOTIFICATIONS-->
+        <!--=======================-->
+        <dependency>
+            <groupId>com.notnoop.apns</groupId>
+            <artifactId>apns</artifactId>
+            <version>1.0.0.Beta6</version>
         </dependency>
         
     </dependencies>
