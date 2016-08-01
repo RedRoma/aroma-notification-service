@@ -25,18 +25,24 @@ import com.notnoop.exceptions.NetworkIOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sir.wellington.alchemy.collections.maps.Maps;
 import sir.wellington.alchemy.collections.sets.Sets;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 
 /**
- *
+ * This Do-Nothing APNS service ignores all requests. This is useful for non-production environments
+ * where we do not want to hit the network.
+ * 
  * @author SirWellington
  */
 @Internal
 final class DoNothingApnsService implements ApnsService 
 {
 
+    private static final Logger LOG = LoggerFactory.getLogger(DoNothingApnsService.class);
+    
     public DoNothingApnsService()
     {
     }
@@ -44,18 +50,21 @@ final class DoNothingApnsService implements ApnsService
     @Override
     public ApnsNotification push(String deviceToken, String payload) throws NetworkIOException
     {
+        LOG.debug("Doing nothing with payload {} to device {}", payload, deviceToken);
         return null;
     }
 
     @Override
     public EnhancedApnsNotification push(String deviceToken, String payload, Date expiry) throws NetworkIOException
     {
+        LOG.debug("Doing nothing with payload {} to device {} and expiry {}", payload, deviceToken, expiry);
         return null;
     }
 
     @Override
     public ApnsNotification push(byte[] deviceToken, byte[] payload) throws NetworkIOException
     {
+        LOG.debug("Doing nothing with payload {} and device {}", payload, deviceToken);
         return null;
     }
 
