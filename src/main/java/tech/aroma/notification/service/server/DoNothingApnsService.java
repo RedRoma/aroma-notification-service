@@ -15,7 +15,7 @@
  */
 
  
-package tech.aroma.notification.service;
+package tech.aroma.notification.service.server;
 
 
 import com.notnoop.apns.ApnsNotification;

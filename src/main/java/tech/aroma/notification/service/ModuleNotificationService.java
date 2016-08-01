@@ -19,6 +19,8 @@ package tech.aroma.notification.service;
 
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.notnoop.apns.ApnsDelegate;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.slf4j.Logger;
@@ -43,4 +45,10 @@ public final class ModuleNotificationService extends AbstractModule
     }
     
 
+    @Provides
+    ApnsDelegate provideApnsDelegate()
+    {
+        return new ApnsListener();
+    }
+    
 }

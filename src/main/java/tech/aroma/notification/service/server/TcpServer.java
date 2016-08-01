@@ -16,8 +16,10 @@
 
 package tech.aroma.notification.service.server;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.notnoop.apns.ApnsService;
 import java.net.SocketException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TThreadPoolServer;
@@ -48,7 +50,8 @@ public final class TcpServer
     public static void main(String[] args) throws TTransportException, SocketException
     {
         Injector injector = Guice.createInjector(new ModuleNotificationService(),
-                                                 new ModuleNotificationOperations());
+                                                 new ModuleNotificationOperations(),
+                                                 new ExternalDependencies());
 
         NotificationService.Iface bananaService = injector.getInstance(NotificationService.Iface.class);
         NotificationService.Processor processor = new NotificationService.Processor<>(bananaService);
@@ -69,5 +72,17 @@ public final class TcpServer
         TThreadPoolServer server = new TThreadPoolServer(serverArgs);
         server.serve();
         server.stop();
+    }
+    
+    
+    static class ExternalDependencies extends AbstractModule
+    {
+
+        @Override
+        protected void configure()
+        {
+            bind(ApnsService.class).to(DoNothingApnsService.class).asEagerSingleton();
+        }
+        
     }
 }
