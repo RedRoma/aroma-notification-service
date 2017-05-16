@@ -17,6 +17,7 @@
 package tech.aroma.notification.service.pigeon;
 
 import java.net.MalformedURLException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,42 +36,41 @@ import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(10)
 @RunWith(AlchemyTestRunner.class)
-public class SlackChannelPigeonTest 
+public class SlackChannelPigeonTest
 {
-    
+
     private AlchemyHttp http;
-    private final String url  = SlackChannelPigeon.SLACK_API_URL;
-    
+    private final String url = SlackChannelPigeon.SLACK_API_URL;
+
     private SlackChannelPigeon instance;
-    
+
     @GeneratePojo
     private SlackChannelPigeon.SlackResponse response;
-    
+
     @GeneratePojo
     private SlackChannel channel;
-    
+
     private Event event;
-    
+
     @Before
     public void setUp() throws MalformedURLException
     {
         http = AlchemyHttpMock.begin()
-            .whenPost()
-            .anyBody()
-            .at(url)
-            .thenReturn(response)
-            .build();
-        
+                              .whenPost()
+                              .anyBody()
+                              .at(url)
+                              .thenReturnPOJO(response)
+                              .build();
+
         http = spy(http);
-        
+
         instance = new SlackChannelPigeon(http);
         verifyZeroInteractions(http);
-        
+
         event = one(events());
     }
 
@@ -78,7 +78,7 @@ public class SlackChannelPigeonTest
     public void testDeliverMessageTo()
     {
         instance.deliverMessageTo(event, channel);
-        
+
         AlchemyHttpMock.verifyAllRequestsMade(http);
     }
 
