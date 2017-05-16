@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
- 
+
 package tech.aroma.notification.service;
 
 
 import javax.inject.Inject;
+
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,7 @@ import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull
 /**
  * This class decorates an existing {@linkplain NotificationService.Iface Notification Service},
  * and adds Authentication of Tokens against an {@linkplain AuthenticationService.Iface Authentication Service}.
- * 
+ *
  * @author SirWellington
  */
 @Internal
@@ -53,20 +54,19 @@ final class AuthenticationLayer implements NotificationService.Iface
 
     private final AuthenticationService.Iface authenticationService;
     private final NotificationService.Iface delegate;
-    
+
     @Inject
     AuthenticationLayer(AuthenticationService.Iface authenticationService,
                         NotificationService.Iface delegate)
     {
         checkThat(authenticationService, delegate)
-            .are(notNull());
+                .are(notNull());
 
         this.authenticationService = authenticationService;
         this.delegate = delegate;
     }
 
-    
-    
+
     @Override
     public double getApiVersion() throws TException
     {
@@ -76,16 +76,16 @@ final class AuthenticationLayer implements NotificationService.Iface
     @Override
     public SendNotificationResponse sendNotification(SendNotificationRequest request) throws InvalidArgumentException,
                                                                                              OperationFailedException,
-                                                                                             InvalidTokenException, 
+                                                                                             InvalidTokenException,
                                                                                              TException
     {
         checkRequestNotNull(request);
-        
+
         checkThat(request.token)
-            .throwing(InvalidTokenException.class)
-            .is(legalToken())
-            .is(validTokenIn(authenticationService));
-        
+                .throwing(InvalidTokenException.class)
+                .is(legalToken())
+                .is(validTokenIn(authenticationService));
+
         return delegate.sendNotification(request);
     }
 

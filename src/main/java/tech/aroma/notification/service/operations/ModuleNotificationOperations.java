@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
- 
+
 package tech.aroma.notification.service.operations;
 
 
@@ -32,7 +32,6 @@ import tech.aroma.thrift.notification.service.SendNotificationResponse;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
 /**
- *
  * @author SirWellington
  */
 public final class ModuleNotificationOperations extends AbstractModule
@@ -45,7 +44,7 @@ public final class ModuleNotificationOperations extends AbstractModule
         bind(new TypeLiteral<ThriftOperation<SendNotificationRequest,SendNotificationResponse>>() {})
             .to(SendNotificationOperation.class);
     }
-    
+
     @Provides
     PigeonFactory providePigeonFactory()
     {

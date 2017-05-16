@@ -38,7 +38,6 @@ import static tech.sirwellington.alchemy.generator.TimeGenerators.pastInstants;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(50)
@@ -55,13 +54,13 @@ public class NotificationAssertionsTest
         channel = one(channels());
         event = one(events());
     }
-    
+
     @DontRepeat
     @Test
     public void testCannotInstantiate()
     {
         assertThrows(() -> NotificationAssertions.class.newInstance())
-            .isInstanceOf(IllegalAccessException.class);
+                .isInstanceOf(IllegalAccessException.class);
     }
 
     @Test
@@ -81,26 +80,26 @@ public class NotificationAssertionsTest
     {
         AlchemyAssertion<Event> assertion = NotificationAssertions.validEvent();
         checkThat(assertion, notNullValue());
-        
-        
+
+
         //Test with Bad arguments
         assertThrows(() -> assertion.check(null))
-            .isInstanceOf(FailedAssertionException.class);
-        
+                .isInstanceOf(FailedAssertionException.class);
+
         Event empty = new Event();
         assertThrows(() -> assertion.check(empty))
-            .isInstanceOf(FailedAssertionException.class);
-        
+                .isInstanceOf(FailedAssertionException.class);
+
         //Missing event type
         Event missingEventType = new Event()
-        .setTimestamp(one(pastInstants()).toEpochMilli());
+                .setTimestamp(one(pastInstants()).toEpochMilli());
         assertThrows(() -> assertion.check(missingEventType))
-            .isInstanceOf(FailedAssertionException.class);
-            
+                .isInstanceOf(FailedAssertionException.class);
+
         //Remove the timestamp
         event.timestamp = 0;
         assertThrows(() -> assertion.check(event))
-            .isInstanceOf(FailedAssertionException.class);
+                .isInstanceOf(FailedAssertionException.class);
     }
 
     @Test
@@ -108,19 +107,19 @@ public class NotificationAssertionsTest
     {
         AlchemyAssertion<EventType> assertion = NotificationAssertions.validEventType();
         checkThat(assertion, notNullValue());
-        
+
         EventType eventType = event.eventType;
         assertion.check(eventType);
-        
+
         // Check with bad arguments
-        
+
         assertThrows(() -> assertion.check(null))
-            .isInstanceOf(FailedAssertionException.class);
-        
+                .isInstanceOf(FailedAssertionException.class);
+
         EventType empty = new EventType();
         assertThrows(() -> assertion.check(empty))
-            .isInstanceOf(FailedAssertionException.class);
-        
+                .isInstanceOf(FailedAssertionException.class);
+
     }
 
 }

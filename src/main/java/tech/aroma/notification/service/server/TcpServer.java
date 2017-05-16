@@ -18,7 +18,9 @@ package tech.aroma.notification.service.server;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
 import java.net.SocketException;
+
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
@@ -35,7 +37,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * This Main Class runs the Notification Service on a Server Socket.
- * 
+ *
  * @author SirWellington
  */
 @Internal
@@ -57,15 +59,15 @@ public final class TcpServer
         socket.getServerSocket().setSoTimeout((int) SECONDS.toMillis(60));
 
         TThreadPoolServer.Args serverArgs = new TThreadPoolServer.Args(socket)
-            .protocolFactory(new TBinaryProtocol.Factory())
-            .processor(processor)
-            .requestTimeout(60)
-            .requestTimeoutUnit(SECONDS)
-            .minWorkerThreads(5)
-            .maxWorkerThreads(100);
-        
+                .protocolFactory(new TBinaryProtocol.Factory())
+                .processor(processor)
+                .requestTimeout(60)
+                .requestTimeoutUnit(SECONDS)
+                .minWorkerThreads(5)
+                .maxWorkerThreads(100);
+
         LOG.info("Starting Notification Service at port {}", PORT);
-        
+
         TThreadPoolServer server = new TThreadPoolServer(serverArgs);
         server.serve();
         server.stop();

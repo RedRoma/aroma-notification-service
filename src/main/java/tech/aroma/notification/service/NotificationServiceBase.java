@@ -17,6 +17,7 @@
 package tech.aroma.notification.service;
 
 import javax.inject.Inject;
+
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,6 @@ import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 
 /**
- *
  * @author SirWellington
  */
 @Internal
@@ -53,7 +53,7 @@ final class NotificationServiceBase implements NotificationService.Iface
     NotificationServiceBase(ThriftOperation<SendNotificationRequest, SendNotificationResponse> sendNotificationOperation)
     {
         checkThat(sendNotificationOperation)
-            .are(notNull());
+                .are(notNull());
 
         this.sendNotificationOperation = sendNotificationOperation;
     }

@@ -17,6 +17,7 @@
 package tech.aroma.notification.service.operations;
 
 import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,7 +51,6 @@ import static tech.sirwellington.alchemy.generator.ObjectGenerators.pojos;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(100)
@@ -66,7 +66,7 @@ public class SendNotificationOperationTest
 
     @GeneratePojo
     private AuthenticationToken token;
-    
+
     private SendNotificationRequest request;
 
     private SendNotificationOperation instance;
@@ -86,14 +86,14 @@ public class SendNotificationOperationTest
         AlchemyGenerator<User> users = pojos(User.class);
 
         Map<AromaChannel, User> channels = listOf(channels())
-            .stream()
-            .distinct()
-            .collect(toMap(c -> c, c -> users.get()));
+                .stream()
+                .distinct()
+                .collect(toMap(c -> c, c -> users.get()));
 
         request = new SendNotificationRequest()
-            .setToken(token)
-            .setChannels(channels)
-            .setEvent(one(events()));
+                .setToken(token)
+                .setChannels(channels)
+                .setEvent(one(events()));
     }
 
     @DontRepeat
@@ -101,7 +101,7 @@ public class SendNotificationOperationTest
     public void testConstructor()
     {
         assertThrows(() -> new SendNotificationOperation(null))
-            .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -112,17 +112,17 @@ public class SendNotificationOperationTest
         assertThat(response, notNullValue());
 
         verify(pigeonFactory, times(request.channels.size()))
-            .getPigeonFor(Mockito.any());
+                .getPigeonFor(Mockito.any());
     }
-    
+
     @DontRepeat
     @Test
     public void testWithNoChannels() throws Exception
     {
         SendNotificationRequest noChannels = new SendNotificationRequest()
-            .setToken(token)
-            .setEvent(request.event);
-        
+                .setToken(token)
+                .setEvent(request.event);
+
         SendNotificationResponse response = instance.process(noChannels);
         assertThat(response, notNullValue());
     }
@@ -132,20 +132,18 @@ public class SendNotificationOperationTest
     public void testProcessWithBadRequest() throws Exception
     {
         assertThrows(() -> instance.process(null))
-            .isInstanceOf(InvalidArgumentException.class);
+                .isInstanceOf(InvalidArgumentException.class);
 
         SendNotificationRequest empty = new SendNotificationRequest();
 
         assertThrows(() -> instance.process(empty))
-            .isInstanceOf(InvalidArgumentException.class);
+                .isInstanceOf(InvalidArgumentException.class);
 
         SendNotificationRequest noEvent = new SendNotificationRequest()
-            .setChannels(request.channels);
+                .setChannels(request.channels);
 
         assertThrows(() -> instance.process(noEvent))
-            .isInstanceOf(InvalidArgumentException.class);
-
-        
+                .isInstanceOf(InvalidArgumentException.class);
 
 
     }

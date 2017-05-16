@@ -18,6 +18,7 @@ package tech.aroma.notification.service.operations;
 
 import java.util.Map;
 import javax.inject.Inject;
+
 import org.apache.thrift.TBase;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
@@ -41,7 +42,6 @@ import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 
 /**
- *
  * @author SirWellington
  */
 @Internal
@@ -49,7 +49,7 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
 {
 
     private final static Logger LOG = LoggerFactory.getLogger(SendNotificationOperation.class);
-    
+
     @StrategyPattern(role = CLIENT)
     private final PigeonFactory pigeonFactory;
 
@@ -57,48 +57,48 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
     SendNotificationOperation(PigeonFactory pigeonFactory)
     {
         checkThat(pigeonFactory)
-            .is(notNull());
-        
+                .is(notNull());
+
         this.pigeonFactory = pigeonFactory;
     }
-    
-    
+
+
     @Override
     public SendNotificationResponse process(SendNotificationRequest request) throws TException
     {
         checkThat(request)
-            .throwing(ex -> new InvalidArgumentException(ex.getMessage()))
-            .is(good());
-        
+                .throwing(ex -> new InvalidArgumentException(ex.getMessage()))
+                .is(good());
+
         request.channels = Maps.nullToEmpty(request.channels);
-        
+
         // For each Channel in the request...
         // Obtain a 'courier' or a 'pigeon' type from a factory.
         // Send the pigeon off to send the event
         // Each pigeon is responsible for sending the message to the right place
         int success = 0;
-        for(Map.Entry<AromaChannel, User> channelByUser : request.channels.entrySet())
+        for (Map.Entry<AromaChannel, User> channelByUser : request.channels.entrySet())
         {
             AromaChannel channel = channelByUser.getKey();
-            
+
             Pigeon<? super TBase> pigeon = pigeonFactory.getPigeonFor(channel);
-            
+
             if (pigeon == null)
             {
                 LOG.warn("Pigeon Factory returned null");
                 continue;
             }
-            
+
             LOG.debug("Sending pigeon {} to deliver event {}", pigeon, request.event);
             pigeon.deliverMessageTo(request.event, channel);
             success++;
         }
-        
+
         LOG.debug("Sent event {} to {} channels", request.event, success);
-        
+
         SendNotificationResponse response = new SendNotificationResponse()
-            .setNotificationId("");
-        
+                .setNotificationId("");
+
         return response;
     }
 
@@ -107,12 +107,12 @@ final class SendNotificationOperation implements ThriftOperation<SendNotificatio
         return request ->
         {
             checkThat(request)
-                .usingMessage("request missing")
-                .is(notNull());
-            
+                    .usingMessage("request missing")
+                    .is(notNull());
+
             checkThat(request.event)
-                .usingMessage("Invalid Event Type")
-                .is(validEvent());
+                    .usingMessage("Invalid Event Type")
+                    .is(validEvent());
         };
     }
 

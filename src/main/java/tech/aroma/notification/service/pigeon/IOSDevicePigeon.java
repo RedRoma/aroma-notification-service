@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
- 
+
 package tech.aroma.notification.service.pigeon;
 
 
@@ -22,10 +22,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
  * @author SirWellington
  */
-class IOSDevicePigeon 
+class IOSDevicePigeon
 {
     private final static Logger LOG = LoggerFactory.getLogger(IOSDevicePigeon.class);
 

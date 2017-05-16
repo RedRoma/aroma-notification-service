@@ -17,9 +17,11 @@
 package tech.aroma.notification.service.server;
 
 import com.google.common.collect.Lists;
+
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +32,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.fail;
 
 /**
- *
  * @author SirWellington
  */
 @IntegrationTest

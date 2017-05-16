@@ -32,7 +32,6 @@ import static tech.aroma.thrift.generators.EventGenerators.events;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(50)
@@ -79,7 +78,7 @@ public class SerializationTest
         AromaChannel result = ThriftObjects.fromBinary(new AromaChannel(), binary);
         assertThat(result, is(channel));
     }
-    
+
     @Test
     public void testEventJson() throws Exception
     {
@@ -87,5 +86,5 @@ public class SerializationTest
         AromaChannel result = ThriftObjects.fromJson(new AromaChannel(), channelJson);
         assertThat(result, is(channel));
     }
-    
+
 }

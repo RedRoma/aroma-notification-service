@@ -39,50 +39,49 @@ import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(100)
 @RunWith(AlchemyTestRunner.class)
-public class NotificationServiceBaseTest 
+public class NotificationServiceBaseTest
 {
-    
+
     @Mock
     private ThriftOperation<SendNotificationRequest, SendNotificationResponse> sendNotificationOperation;
-    
+
     @GeneratePojo
     private AuthenticationToken token;
-    
+
     private SendNotificationRequest sendNotificationRequest;
-    
+
     @GeneratePojo
     private SendNotificationResponse sendNotificationResponse;
 
     private NotificationServiceBase instance;
-    
+
     @Before
     public void setUp()
     {
         instance = new NotificationServiceBase(sendNotificationOperation);
-        
+
         verifyZeroInteractions(sendNotificationOperation);
-        
+
         setupData();
     }
-    
+
     private void setupData()
     {
         sendNotificationRequest = new SendNotificationRequest()
-            .setToken(token)
-            .setEvent(one(events()));
+                .setToken(token)
+                .setEvent(one(events()));
     }
-    
+
     @DontRepeat
     @Test
     public void testConstructor()
     {
         assertThrows(() -> new NotificationServiceBase(null))
-            .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -96,18 +95,17 @@ public class NotificationServiceBaseTest
     public void testSendNotification() throws Exception
     {
         when(sendNotificationOperation.process(sendNotificationRequest))
-            .thenReturn(sendNotificationResponse);
-        
+                .thenReturn(sendNotificationResponse);
+
         SendNotificationResponse response = instance.sendNotification(sendNotificationRequest);
-        
+
         assertThat(response, is(sendNotificationResponse));
         verify(sendNotificationOperation).process(sendNotificationRequest);
-        
+
         //Test with bad arguments
         assertThrows(() -> instance.sendNotification(null))
-            .isInstanceOf(InvalidArgumentException.class);
+                .isInstanceOf(InvalidArgumentException.class);
     }
-    
-    
+
 
 }

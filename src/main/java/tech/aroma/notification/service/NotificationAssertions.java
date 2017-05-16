@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
- 
+
 package tech.aroma.notification.service;
 
 
@@ -34,12 +34,11 @@ import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
 import static tech.sirwellington.alchemy.arguments.assertions.NumberAssertions.greaterThan;
 
 /**
- *
  * @author SirWellington
  */
 @Internal
 @NonInstantiable
-public final class NotificationAssertions 
+public final class NotificationAssertions
 {
     private final static Logger LOG = LoggerFactory.getLogger(NotificationAssertions.class);
 
@@ -47,23 +46,23 @@ public final class NotificationAssertions
     {
         throw new IllegalAccessException("cannot instantiate");
     }
-    
+
     public static AlchemyAssertion<AromaChannel> validAromaChannel()
     {
         return channel ->
         {
             checkThat(channel)
-                .usingMessage("channel is null")
-                .is(notNull());
-            
+                    .usingMessage("channel is null")
+                    .is(notNull());
+
             if (!isSet(channel))
             {
                 throw new FailedAssertionException("AromaChannel has no value: " + channel);
             }
-            
+
         };
     }
-    
+
     private static boolean isSet(AromaChannel channel)
     {
         if (channel.isSetCustomChannel())
@@ -99,35 +98,35 @@ public final class NotificationAssertions
         return false;
     }
 
-    
+
     public static AlchemyAssertion<Event> validEvent()
     {
         return event ->
         {
             checkThat(event)
-                .usingMessage("event is missing")
-                .is(notNull());
-            
+                    .usingMessage("event is missing")
+                    .is(notNull());
+
             checkThat(event.timestamp)
-                .usingMessage("invalid timestamp: " + event.timestamp)
-                .is(greaterThan(0L));
-            
+                    .usingMessage("invalid timestamp: " + event.timestamp)
+                    .is(greaterThan(0L));
+
             checkThat(event.eventType)
-                .is(validEventType());
+                    .is(validEventType());
         };
     }
-    
+
     public static AlchemyAssertion<EventType> validEventType()
     {
         return type ->
         {
             checkThat(type)
-                .usingMessage("missing eventType")
-                .is(notNull());
-            
+                    .usingMessage("missing eventType")
+                    .is(notNull());
+
             checkThat(type.isSet())
-                .usingMessage("eventType is not set")
-                .is(equalTo(true));
+                    .usingMessage("eventType is not set")
+                    .is(equalTo(true));
         };
     }
 }

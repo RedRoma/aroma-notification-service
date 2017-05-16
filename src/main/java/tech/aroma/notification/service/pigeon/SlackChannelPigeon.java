@@ -17,8 +17,10 @@
 package tech.aroma.notification.service.pigeon;
 
 import com.google.gson.JsonObject;
+
 import java.util.Objects;
 import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.thrift.channels.SlackChannel;
@@ -66,8 +68,8 @@ final class SlackChannelPigeon implements Pigeon<SlackChannel>
         checkThat(message).is(validEvent());
 
         checkThat(channel.channelName, channel.domainName, channel.slackToken)
-            .usingMessage("Slack Channel missing properties")
-            .are(nonEmptyString());
+                .usingMessage("Slack Channel missing properties")
+                .are(nonEmptyString());
 
         SlackRequest request = new SlackRequest();
         request.token = channel.channelName;
@@ -80,17 +82,17 @@ final class SlackChannelPigeon implements Pigeon<SlackChannel>
         try
         {
             response = http.go()
-                .post()
-                .body(request)
-                .expecting(SlackResponse.class)
-                .at(SLACK_API_URL);
+                           .post()
+                           .body(request)
+                           .expecting(SlackResponse.class)
+                           .at(SLACK_API_URL);
         }
         catch (Exception ex)
         {
             LOG.error("Failed to send to Slack Channel: {}", channel, ex);
             return;
         }
-        
+
         LOG.info("Successfully posted message to Slack: {}", response);
     }
 

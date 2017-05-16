@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
- 
+
 package tech.aroma.notification.service;
 
 
 import com.google.inject.AbstractModule;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.thrift.notification.service.NotificationService;
 
 /**
- *
  * @author SirWellington
  */
 public final class ModuleNotificationService extends AbstractModule
@@ -36,11 +37,11 @@ public final class ModuleNotificationService extends AbstractModule
     @Override
     protected void configure()
     {
-        
+
         bind(NotificationService.Iface.class).to(NotificationServiceBase.class);
-        
+
         bind(ExecutorService.class).toInstance(Executors.newWorkStealingPool(10));
     }
-    
+
 
 }

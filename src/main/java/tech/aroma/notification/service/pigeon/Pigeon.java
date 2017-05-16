@@ -28,20 +28,18 @@ import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPa
 
 /**
  * A Pigeon is responsible for sending a Message to a particular {@link AromaChannel}.
- * 
- * @author SirWellington
- * 
+ *
  * @param <C> The particular {@link AromaChannel} an implementation delivers.
+ * @author SirWellington
  */
 @StrategyPattern(role = INTERFACE)
-public interface Pigeon <C extends TBase>
+public interface Pigeon<C extends TBase>
 {
     /**
      * Delivers a message to a particular {@link AromaChannel}.
-     * 
+     *
      * @param message
      * @param channel
-     * 
      * @throws OperationFailedException If the message could not be delivered.
      */
     void deliverMessageTo(Event message, C channel) throws OperationFailedException;

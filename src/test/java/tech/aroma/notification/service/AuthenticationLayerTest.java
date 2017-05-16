@@ -46,7 +46,6 @@ import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThr
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateString.Type.HEXADECIMAL;
 
 /**
- *
  * @author SirWellington
  */
 @Repeat(100)
@@ -90,10 +89,10 @@ public class AuthenticationLayerTest
     public void testConstructor() throws Exception
     {
         assertThrows(() -> new AuthenticationLayer(null, delegate))
-            .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class);
 
         assertThrows(() -> new AuthenticationLayer(authenticationService, null))
-            .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -119,23 +118,23 @@ public class AuthenticationLayerTest
     public void testSendNotificationWithInvalidToken() throws Exception
     {
         VerifyTokenRequest request = new VerifyTokenRequest()
-            .setTokenId(tokenId);
+                .setTokenId(tokenId);
 
         when(authenticationService.verifyToken(request))
-            .thenThrow(new InvalidTokenException());
+                .thenThrow(new InvalidTokenException());
 
         assertThrows(() -> instance.sendNotification(sendNotificationRequest))
-            .isInstanceOf(InvalidTokenException.class);
+                .isInstanceOf(InvalidTokenException.class);
     }
 
     @Test
     public void testSendNotificationWhenDelegateThrows() throws Exception
     {
         when(delegate.sendNotification(sendNotificationRequest))
-            .thenThrow(new OperationFailedException());
+                .thenThrow(new OperationFailedException());
 
         assertThrows(() -> instance.sendNotification(sendNotificationRequest))
-            .isInstanceOf(OperationFailedException.class);
+                .isInstanceOf(OperationFailedException.class);
     }
 
     private void setupData()
@@ -144,14 +143,14 @@ public class AuthenticationLayerTest
         token.unsetOwnerId();
 
         sendNotificationRequest = new SendNotificationRequest()
-            .setToken(token);
+                .setToken(token);
 
     }
 
     private void setupMocks() throws TException
     {
         when(delegate.sendNotification(sendNotificationRequest))
-            .thenReturn(sendNotificationResponse);
+                .thenReturn(sendNotificationResponse);
     }
 
 }
