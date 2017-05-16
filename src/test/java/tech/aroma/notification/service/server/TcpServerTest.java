@@ -16,12 +16,11 @@
 
 package tech.aroma.notification.service.server;
 
-import com.google.common.collect.Lists;
-
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

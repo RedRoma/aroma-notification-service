@@ -24,20 +24,14 @@ import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.thrift.authentication.service.AuthenticationService;
-import tech.aroma.thrift.exceptions.InvalidArgumentException;
-import tech.aroma.thrift.exceptions.InvalidTokenException;
-import tech.aroma.thrift.exceptions.OperationFailedException;
-import tech.aroma.thrift.notification.service.NotificationService;
-import tech.aroma.thrift.notification.service.SendNotificationRequest;
-import tech.aroma.thrift.notification.service.SendNotificationResponse;
+import tech.aroma.thrift.exceptions.*;
+import tech.aroma.thrift.notification.service.*;
 import tech.sirwellington.alchemy.annotations.access.Internal;
 import tech.sirwellington.alchemy.annotations.designs.patterns.DecoratorPattern;
 
-import static tech.aroma.thrift.assertions.AromaAssertions.checkRequestNotNull;
-import static tech.aroma.thrift.assertions.AromaAssertions.legalToken;
-import static tech.aroma.thrift.assertions.AromaAssertions.validTokenIn;
+import static tech.aroma.thrift.assertions.AromaAssertions.*;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.DecoratorPattern.Role.CONCRETE_DECORATOR;
-import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.Arguments.*;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 
 /**

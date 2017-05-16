@@ -26,23 +26,15 @@ import tech.aroma.thrift.authentication.service.AuthenticationService;
 import tech.aroma.thrift.authentication.service.VerifyTokenRequest;
 import tech.aroma.thrift.exceptions.InvalidTokenException;
 import tech.aroma.thrift.exceptions.OperationFailedException;
-import tech.aroma.thrift.notification.service.NotificationService;
-import tech.aroma.thrift.notification.service.SendNotificationRequest;
-import tech.aroma.thrift.notification.service.SendNotificationResponse;
-import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
-import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
-import tech.sirwellington.alchemy.test.junit.runners.GeneratePojo;
-import tech.sirwellington.alchemy.test.junit.runners.GenerateString;
-import tech.sirwellington.alchemy.test.junit.runners.Repeat;
+import tech.aroma.thrift.notification.service.*;
+import tech.sirwellington.alchemy.test.junit.runners.*;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 import static tech.sirwellington.alchemy.generator.NumberGenerators.doubles;
-import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
+import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.*;
 import static tech.sirwellington.alchemy.test.junit.runners.GenerateString.Type.HEXADECIMAL;
 
 /**

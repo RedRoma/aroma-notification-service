@@ -16,11 +16,10 @@
 
 package tech.aroma.notification.service.pigeon;
 
-import com.google.gson.JsonObject;
-
 import java.util.Objects;
 import javax.inject.Inject;
 
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.aroma.thrift.channels.SlackChannel;
@@ -31,10 +30,9 @@ import tech.sirwellington.alchemy.http.AlchemyHttp;
 
 import static tech.aroma.notification.service.NotificationAssertions.validEvent;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CONCRETE_BEHAVIOR;
-import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.Arguments.*;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
-import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.nonEmptyString;
-import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.assertions.StringAssertions.*;
 
 /**
  * This Pigeon delivers messages to a Slack Channel.

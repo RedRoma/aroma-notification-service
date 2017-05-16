@@ -25,18 +25,15 @@ import tech.aroma.thrift.authentication.AuthenticationToken;
 import tech.aroma.thrift.exceptions.InvalidArgumentException;
 import tech.aroma.thrift.notification.service.SendNotificationRequest;
 import tech.aroma.thrift.notification.service.SendNotificationResponse;
-import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
-import tech.sirwellington.alchemy.test.junit.runners.DontRepeat;
-import tech.sirwellington.alchemy.test.junit.runners.GeneratePojo;
-import tech.sirwellington.alchemy.test.junit.runners.Repeat;
+import tech.sirwellington.alchemy.test.junit.runners.*;
 import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 import static tech.aroma.thrift.generators.EventGenerators.events;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
-import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.assertThrows;
+import static tech.sirwellington.alchemy.test.junit.ThrowableAssertion.*;
 
 /**
  * @author SirWellington

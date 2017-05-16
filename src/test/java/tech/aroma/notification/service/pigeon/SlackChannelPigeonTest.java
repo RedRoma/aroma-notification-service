@@ -25,12 +25,9 @@ import tech.aroma.thrift.channels.SlackChannel;
 import tech.aroma.thrift.events.Event;
 import tech.sirwellington.alchemy.http.AlchemyHttp;
 import tech.sirwellington.alchemy.http.mock.AlchemyHttpMock;
-import tech.sirwellington.alchemy.test.junit.runners.AlchemyTestRunner;
-import tech.sirwellington.alchemy.test.junit.runners.GeneratePojo;
-import tech.sirwellington.alchemy.test.junit.runners.Repeat;
+import tech.sirwellington.alchemy.test.junit.runners.*;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.*;
 import static tech.aroma.thrift.generators.EventGenerators.events;
 import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
 
