@@ -63,7 +63,7 @@ public class SlackChannelPigeonTest
             .whenPost()
             .anyBody()
             .at(url)
-            .thenReturn(response)
+            .thenReturnPOJO(response)
             .build();
         
         http = spy(http);
