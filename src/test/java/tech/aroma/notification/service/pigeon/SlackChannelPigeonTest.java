@@ -29,7 +29,7 @@ import tech.sirwellington.alchemy.test.junit.runners.*;
 
 import static org.mockito.Mockito.*;
 import static tech.aroma.thrift.generators.EventGenerators.events;
-import static tech.sirwellington.alchemy.generator.AlchemyGenerator.one;
+import static tech.sirwellington.alchemy.generator.AlchemyGenerator.Get.one;
 
 
 /**
