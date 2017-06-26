@@ -16,11 +16,10 @@
 
 package tech.aroma.notification.service.server;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.notnoop.apns.ApnsService;
 import java.net.SocketException;
+
+import com.google.inject.*;
+import com.notnoop.apns.ApnsService;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;

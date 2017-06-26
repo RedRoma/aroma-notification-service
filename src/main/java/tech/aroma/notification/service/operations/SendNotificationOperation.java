@@ -18,6 +18,7 @@ package tech.aroma.notification.service.operations;
 
 import java.util.Map;
 import javax.inject.Inject;
+
 import org.apache.thrift.TBase;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ import tech.sirwellington.alchemy.thrift.operations.ThriftOperation;
 
 import static tech.aroma.notification.service.NotificationAssertions.validEvent;
 import static tech.sirwellington.alchemy.annotations.designs.patterns.StrategyPattern.Role.CLIENT;
-import static tech.sirwellington.alchemy.arguments.Arguments.checkThat;
+import static tech.sirwellington.alchemy.arguments.Arguments.*;
 import static tech.sirwellington.alchemy.arguments.assertions.Assertions.notNull;
 
 /**
